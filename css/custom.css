@@ -57,3 +57,7 @@
 	box-shadow: 0px 2px 5px 0px rgba(106, 173, 122, 0.7);
 	transform: translateY(-5px);
 }
+
+.emission_link{
+	color:#797979;
+}
