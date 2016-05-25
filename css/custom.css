@@ -1,0 +1,32 @@
+/* your styles go here */
+
+.custom-btn-fa{
+	border:1px solid #3C5899;
+	background:transparent;
+	color:#3C5899;
+	padding-left:10px;
+	padding-right:10px;
+	font-weight:bold;
+	transition:0.5s;
+	outline:none;
+}
+
+.custom-btn-fa:hover{
+	background:#3C5899;
+	color:#fff;
+}
+
+.custom-btn-tw{
+	border:1px solid #00ACED;
+	background:transparent;
+	color:#00ACED;
+	padding-left:10px;
+	padding-right:10px;
+	font-weight:bold;
+	transition:0.5s;
+	outline:none;
+}
+.custom-btn-tw:hover{
+	background:#00ACED;
+	color:#fff;
+}
