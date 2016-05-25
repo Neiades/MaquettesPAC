@@ -38,16 +38,16 @@
 		<div id="all">
 			<!-- NAVBAR -->
 			<header><?php include("includes/navigation.php");?></header>
-	        <?php include("includes/modals.php") ?>
+
 			<div id="heading-breadcrumbs">
 	            <div class="container">
 	                <div class="row">
-	                    <div class="col-md-7">
+	                    <div class="col-md-4">
 	                    </div>
-	                    <div class="col-md-5">
+	                    <div class="col-md-8">
 	                        <ul class="breadcrumb">
-	                            <li>Accueil</li>
-								<li>Articles</li>
+	                            <li><a href="index.php">Accueil</a></li>
+															<li>Articles</li>
 	                        </ul>
 	                    </div>
 	                </div>
@@ -59,6 +59,9 @@
 	            <div class="container">
 	                <div class="row">
 						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+
+							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Nos articles</h1></p></center></div></div>
+							<br><br><br>
 
 							<section class="post">
 	                            <div class="row">
@@ -72,22 +75,21 @@
 	                                <div class="col-md-8">
 	                                    <h2><a href="post.htmls">Fashion now</a></h2>
 	                                    <div class="clearfix">
-	                                        <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
 	                                        </p>
 	                                        <p class="date-comments">
 	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                            <a href="blog-post.html"><i class="fa fa-comment-o"></i> 8 Comments</a>
 	                                        </p>
 	                                    </div>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
 	                                    </p>
 	                                </div>
 	                            </div>
 	                        </section>
 
-	                        <section class="post">
+													<section class="post">
 	                            <div class="row">
 	                                <div class="col-md-4">
 	                                    <div class="video">
@@ -99,16 +101,15 @@
 	                                <div class="col-md-8">
 	                                    <h2><a href="post.htmls">Post with video</a></h2>
 	                                    <div class="clearfix">
-	                                        <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
 	                                        </p>
 	                                        <p class="date-comments">
 	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                            <a href="blog-post.html"><i class="fa fa-comment-o"></i> 8 Comments</a>
 	                                        </p>
 	                                    </div>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
 	                                    </p>
 	                                </div>
 	                            </div>
@@ -126,16 +127,15 @@
 	                                <div class="col-md-8">
 	                                    <h2><a href="post.htmls">Fashion now</a></h2>
 	                                    <div class="clearfix">
-	                                        <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
+	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
 	                                        </p>
 	                                        <p class="date-comments">
 	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                            <a href="blog-post.html"><i class="fa fa-comment-o"></i> 8 Comments</a>
 	                                        </p>
 	                                    </div>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
 	                                    </p>
 	                                </div>
 	                            </div>
@@ -154,7 +154,6 @@
 
 			<!-- FOOTER -->
 			<?php include("includes/footer.php") ?>
-			<?php include("includes/copyright.html") ?>
 
 		</div>
 	</body>

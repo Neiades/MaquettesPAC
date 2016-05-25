@@ -38,7 +38,7 @@
 		<div id="all">
 			<!-- NAVBAR -->
 			<header><?php include("includes/navigation.php");?></header>
-	        <?php include("includes/modals.php") ?>
+
 			<div id="heading-breadcrumbs">
 	            <div class="container">
 	                <div class="row">
@@ -46,8 +46,8 @@
 	                    </div>
 	                    <div class="col-md-5">
 	                        <ul class="breadcrumb">
-	                            <li>Accueil</li>
-								<li>Emissions</li>
+	                            <li><a href="index.php">Accueil</a></li>
+															<li>Emissions</li>
 	                        </ul>
 	                    </div>
 	                </div>
@@ -60,6 +60,9 @@
 	                <div class="row">
 						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
 
+							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Toutes les émissions de Radio Pac !</h1></p></center></div></div>
+							<br><br><br>
+
 							<section class="post">
 	                            <div class="row">
 	                                <div class="col-md-4">
@@ -73,7 +76,7 @@
 	                                    <h2><a href="post.htmls">Nom emission</a></h2>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+
 	                                    </p>
 	                                </div>
 	                            </div>
@@ -92,7 +95,7 @@
 	                                    <h2><a href="post.htmls">Nom emission</a></h2>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+
 	                                    </p>
 	                                </div>
 	                            </div>
@@ -111,7 +114,7 @@
 	                                    <h2><a href="post.htmls">Nom emission</a></h2>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+
 	                                    </p>
 	                                </div>
 	                            </div>
@@ -120,11 +123,11 @@
                     	</div>
 	                </div>
 	            </div>
+							<br><br><br>
 	        </div>
 
 			<!-- FOOTER -->
 			<?php include("includes/footer.php") ?>
-			<?php include("includes/copyright.html") ?>
 
 		</div>
 	</body>

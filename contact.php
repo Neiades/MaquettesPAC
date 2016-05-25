@@ -146,7 +146,6 @@
 
 			<!-- FOOTER -->
 			<?php include("includes/footer.php") ?>
-			<?php include("includes/copyright.html") ?>
 
 		</div>
 	</body>

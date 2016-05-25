@@ -38,7 +38,7 @@
 		<div id="all">
 			<!-- NAVBAR -->
 			<header><?php include("includes/navigation.php");?></header>
-	        <?php include("includes/modals.php") ?>
+
 			<div id="heading-breadcrumbs">
 	            <div class="container">
 	                <div class="row">
@@ -46,8 +46,8 @@
 	                    </div>
 	                    <div class="col-md-5">
 	                        <ul class="breadcrumb">
-	                            <li>Accueil</li>
-								<li>Evenements</li>
+	                            <li><a href="index.php">Accueil</a></li>
+															<li>Evenements</li>
 	                        </ul>
 	                    </div>
 	                </div>
@@ -58,20 +58,24 @@
 			<div id="content">
 	            <div class="container">
 	                <div class="row">
-						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+										<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+
+											<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Les événements dans la région !</h1></p></center></div></div>
+											<br><br><br>
 
 							<section class="post">
 	                            <div class="row">
-	                                <div class="col-md-4">
+
+	                                <div class="col-md-3">
 	                                    <div class="image">
 	                                        <a href="blog-post.html">
 	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
 	                                        </a>
 	                                    </div>
 	                                </div>
-	                                <div class="col-md-8">
+	                                <div class="col-md-9">
 	                                    <h2><a href="post.htmls">Nom evenement</a></h2>
-										<div class="clearfix">
+																			<div class="clearfix">
 	                                        <p class="author-category">Lieu : Trifouilli les oies</p>
 	                                        <p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
 	                                            <a href="blog-post.html">Du : June 20, 2013</a>
@@ -80,64 +84,99 @@
 	                                    </div>
 	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
 	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
+	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
 	                                    </p>
 	                                </div>
 	                            </div>
 	                        </section>
 
 							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Nom evenement</a></h2>
-										<div class="clearfix">
-	                                        <p class="author-category">Lieu : Trifouilli les oies</p>
-	                                        <p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-	                                            <a href="blog-post.html">Du : June 20, 2013</a>
-	                                            <a href="blog-post.html">Au : June 23, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-	                                    </p>
-	                                </div>
-	                            </div>
+												<div class="row">
+
+														<div class="col-md-3">
+																<div class="image">
+																		<a href="blog-post.html">
+																				<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
+																		</a>
+																</div>
+														</div>
+														<div class="col-md-9">
+																<h2><a href="post.htmls">Nom evenement</a></h2>
+																<div class="clearfix">
+																		<p class="author-category">Lieu : Trifouilli les oies</p>
+																		<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
+																				<a href="blog-post.html">Du : June 20, 2013</a>
+																				<a href="blog-post.html">Au : June 23, 2013</a>
+																		</p>
+																</div>
+																<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+																		Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+																<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
+																</p>
+														</div>
+												</div>
 	                        </section>
 
 							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Nom evenement</a></h2>
-										<div class="clearfix">
-	                                        <p class="author-category">Lieu : Trifouilli les oies</p>
-	                                        <p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-	                                            <a href="blog-post.html">Du : June 20, 2013</a>
-	                                            <a href="blog-post.html">Au : June 23, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continue reading</a>
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+												<div class="row">
 
+														<div class="col-md-3">
+																<div class="image">
+																		<a href="blog-post.html">
+																				<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
+																		</a>
+																</div>
+														</div>
+														<div class="col-md-9">
+																<h2><a href="post.htmls">Nom evenement</a></h2>
+																<div class="clearfix">
+																		<p class="author-category">Lieu : Trifouilli les oies</p>
+																		<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
+																				<a href="blog-post.html">Du : June 20, 2013</a>
+																				<a href="blog-post.html">Au : June 23, 2013</a>
+																		</p>
+																</div>
+																<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+																		Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+																<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
+																</p>
+														</div>
+												</div>
+                    </section>
+
+										<section class="post">
+															<div class="row">
+
+																	<div class="col-md-3">
+																			<div class="image">
+																					<a href="blog-post.html">
+																							<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
+																					</a>
+																			</div>
+																	</div>
+																	<div class="col-md-9">
+																			<h2><a href="post.htmls">Nom evenement</a></h2>
+																			<div class="clearfix">
+																					<p class="author-category">Lieu : Trifouilli les oies</p>
+																					<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
+																							<a href="blog-post.html">Du : June 20, 2013</a>
+																							<a href="blog-post.html">Au : June 23, 2013</a>
+																					</p>
+																			</div>
+																			<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+																					Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+																			<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
+																			</p>
+																	</div>
+															</div>
+			                    </section>
+
+													<ul class="pager">
+															<li class="previous"><a href="#">&larr; Ancien</a>
+															</li>
+															<li class="next disabled"><a href="#">Récent &rarr;</a>
+															</li>
+													</ul>
 
                     	</div>
 	                </div>
@@ -146,7 +185,6 @@
 
 			<!-- FOOTER -->
 			<?php include("includes/footer.php") ?>
-			<?php include("includes/copyright.html") ?>
 
 		</div>
 	</body>
