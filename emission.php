@@ -1,6 +1,10 @@
 <?php
   include"includes/database.php";
 
+  if(!isset($_GET['id'])){
+    header('location:index.php');
+  }
+
   $id = $_GET['id'];
   $sql = "SELECT * FROM emissions WHERE id_emission = $id";
   $emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -9,6 +13,7 @@
   $nb_podcast = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
   $nb_podcast = $nb_podcast['qte'];
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 

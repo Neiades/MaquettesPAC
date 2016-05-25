@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <?php include("includes/database.php"); ?>
     <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
@@ -58,10 +59,10 @@
         <div id="heading-breadcrumbs">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-1">
                         <h1></h1>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-11">
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>

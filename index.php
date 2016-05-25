@@ -214,7 +214,7 @@
 											$photo = $evenement['photo_event'];
 										}
 
-										$contenu_event = strip_tags($evenement['$contenu_event']);
+										$contenu_event = strip_tags($evenement['contenu_event']);
 										if(strlen($contenu_event)>50){
 											$contenu_event = substr($contenu_event,0,50)."...";
 										}
@@ -346,6 +346,7 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/jquery.parallax-1.1.3.js"></script>
 	<script src="js/front.js"></script>
+
 	<script src="js/owl.carousel.min.js"></script>
 
 </html>

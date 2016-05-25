@@ -126,7 +126,7 @@
                               <img src="<?=$photo;?>" class="img-responsive" alt="Example blog post alt">
                           </p>
 
-                          <?=$evenement['contenu_evenement'];?>
+                          <?=$evenement['contenu_event'];?>
 
                         </div>
                         <!-- /#post-content -->
@@ -158,51 +158,12 @@
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Recherche</h3>
-                            </div>
-
-                            <div class="panel-body">
-                                <form role="search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <span class="input-group-btn">
-
-		    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
-
-		</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default sidebar-menu">
-
-                            <div class="panel-heading">
                                 <h3 class="panel-title">Categorie</h3>
                             </div>
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="blog.html">Gastronomie</a>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="panel sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Tags</h3>
-                            </div>
-
-                            <div class="panel-body">
-                                <ul class="tag-cloud">
-                                    <li><a href="#"><i class="fa fa-tags"></i>Festival</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i>Saucisse</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i>Charcuterie</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i>Cochon</a>
-                                    </li>
+                                    <li class="active"><a href="liste_article.php?id_event=<?=$evenement['type_event'];?>"><?=$evenement['lib_type_event'];?></a>
                                 </ul>
                             </div>
                         </div>
