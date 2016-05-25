@@ -1,3 +1,21 @@
+<?php
+  include"includes/database.php";
+
+  if(!isset($_GET['id'])){
+    header('location:index.php');
+  }
+
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM evenements E , type_event TE WHERE E.type_event = TE.id_type_event AND id = $id";
+  $evenement = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+  if(empty($evenement['photo_evenement'])){
+    $photo = $evenement['photo_type_event'];
+  } else {
+    $photo = $evenement['photo_evenement'];
+  }
+
+ ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -65,9 +83,9 @@
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                            <li><a href="#">Évenements</a>
+                            <li><a href="liste_evenement.php">Évenements</a>
                             </li>
-                            <li>Fête de la saucisse 2016</li>
+                            <li><?=$evenement['title'];?></li>
                         </ul>
 
                     </div>
@@ -86,11 +104,18 @@
                     <div class="col-md-9" id="blog-post">
 
                         <!-- Titre de l'article + date et auteur -->
-                        <p class="lead"><h1>Fête de la saucisse 2016</h1></p>
-                        <p class="text-muted text-uppercase mb-small text-right">Par <a href="#">John Doe</a> | 24 Mai 2016</p>
-                        <p><h4>Date : 24/05/2016 au 28/05/2016</h4></p>
-                        <p><h4>Lieu : Trifouilly-Les-Oies</h4></p>
-                        <p><h4>Site web : <a href="http://www.foirealasaucisse.fr/">http://www.foirealasaucisse.fr/</a></h4></p>
+                        <p class="lead"><h1><?=$evenement['title'];?></h1></p>
+                        <p class="text-muted text-uppercase mb-small text-right">Publié le <?=$evenement['date_event'];?></p>
+                        <p><h4>Début : <?=$evenement['start'];?></h4></p>
+                        <p><h4>Fin : <?=$evenement['end'];?></h4></p>
+                        <p><h4>Lieu : <?=$evenement['lieu'];?></h4></p>
+                        <?php
+                          if($evenement['url']){
+                            ?>
+                            <p><h4>Site web : <a href="<?=$evenement['url'];?>"><?=$evenement['url'];?></a></h4></p>
+                            <?php
+                          }
+                        ?>
 
                         <br>
 
@@ -98,46 +123,10 @@
                         <div id="post-content">
 
                           <p>
-                              <img src="img/blog2.jpg" class="img-responsive" alt="Example blog post alt">
+                              <img src="<?=$photo;?>" class="img-responsive" alt="Example blog post alt">
                           </p>
-                          <br>
-                            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-                                semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean
-                                fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 
-
-                            <h2>Sous-titre </h2>
-
-                            <ol>
-                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                <li>Aliquam tincidunt mauris eu risus.</li>
-                            </ol>
-
-                            <blockquote>
-                                <p>Ceci est une citation.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p> Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada
-                                    tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p>
-                            </blockquote>
-
-                            <h3>Header Level 3</h3>
-
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                                ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
-                                condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros
-                                eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                <li>Aliquam tincidunt mauris eu risus.</li>
-                            </ul>
-
-                            <p>
-                                <img src="img/blog.jpg" class="img-responsive" alt="Example blog post alt">
-                            </p>
-
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                                ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
-                                condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros
-                                eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                          <?=$evenement['contenu_evenement'];?>
 
                         </div>
                         <!-- /#post-content -->
