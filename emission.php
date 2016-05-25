@@ -1,3 +1,14 @@
+<?php
+  include"includes/database.php";
+
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM emissions WHERE id_emission = $id";
+  $emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+  $sql = "SELECT count(id_podcast) as qte FROM podcasts WHERE emission_podcast = $id";
+  $nb_podcast = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+  $nb_podcast = $nb_podcast['qte'];
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -65,9 +76,9 @@
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                            <li><a href="#">Emissions</a>
+                            <li><a href="liste_emission.php">Emissions</a>
                             </li>
-                            <li>Les lectures de Marie</li>
+                            <li><?= $emission['titre_emission'] ?></li>
                         </ul>
 
                     </div>
@@ -86,7 +97,7 @@
                     <div class="col-md-9" id="blog-post">
 
                         <!-- Titre de l'article + date et auteur -->
-                        <center><p class="lead"><h1 style="font-size: 42px;">Les lectures de Marie</h1></p></center>
+                        <center><p class="lead"><h1 style="font-size: 42px;"><?=$emission['titre_emission'] ?></h1></p></center>
                         <br>
 
                         <!-- Contenu de l'article -->
@@ -96,15 +107,13 @@
 
                               <div class="col-md-4">
                                 <p>
-                                    <img src="http://radiopac.fr/IMG/jpg/PAC_Litterature_A3.jpg" class="img-responsive" alt="Example blog post alt">
+                                    <img src="<?=$emission['photo_emission']?>" class="img-responsive" alt="Example blog post alt">
                                 </p>
                               </div>
 
                               <div class="col-md-8">
                                 <br>
-                                  <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-                                      semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean
-                                      fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+                                  <?=$emission['descri_emission'] ?>
                               </div>
 
                           </div>
@@ -116,13 +125,13 @@
                             </div>
                           </div>
 
-                            <div class="row">
+                            <div id="liste-podcast" class="row">
 
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
                                     <div class="box-image-text blog">
                                         <div class="top">
                                             <div class="image">
-                                                <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                                                <img id="img-podcast1" src="" alt="" class="img-responsive">
                                             </div>
                                             <div class="bg"></div>
                                             <div class="text">
@@ -132,8 +141,8 @@
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h4><a href="blog-post.html">Neon Genesis Evangelion</a></h4>
-                                            <p class="author-category">Par <a href="#">John Snow</a></p>
+                                            <h4><a id="titre-podcast1" href="blog-post.html"></a></h4>
+                                            <p id="date-podcast1" class="author-category"></p>
 
                                         </div>
                                     </div>
@@ -141,11 +150,11 @@
 
                                 </div>
 
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
                                     <div class="box-image-text blog">
                                         <div class="top">
                                             <div class="image">
-                                                <img src="img/portfolio-5.jpg" alt="" class="img-responsive">
+                                                <img id="img-podcast2" src="" alt="" class="img-responsive">
                                             </div>
                                             <div class="bg"></div>
                                             <div class="text">
@@ -155,8 +164,8 @@
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h4><a href="blog-post.html">Nichijou</a></h4>
-                                            <p class="author-category">By <a href="#">John Snow</a></p>
+                                            <h4><a id="titre-podcast2" href="blog-post.html"></a></h4>
+                                            <p id="date-podcast2" class="author-category"></p>
 
                                         </div>
                                     </div>
@@ -164,11 +173,11 @@
 
                                 </div>
 
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-4 col-sm-4 col-xs-4">
                                     <div class="box-image-text blog">
                                         <div class="top">
                                             <div class="image">
-                                                <img src="img/portfolio-6.jpg" alt="" class="img-responsive">
+                                                <img id="img-podcast3" src="" alt="" class="img-responsive">
                                             </div>
                                             <div class="bg"></div>
                                             <div class="text">
@@ -178,8 +187,8 @@
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h4><a href="blog-post.html">Naruto</a></h4>
-                                            <p class="author-category">Par <a href="#">John Snow</a></p>
+                                            <h4><a id="titre-podcast3" href="blog-post.html"></a></h4>
+                                            <p id="date-podcast3" class="author-category"></p>
 
                                         </div>
                                     </div>
@@ -190,9 +199,9 @@
                             </div>
 
                             <ul class="pager">
-                                <li class="previous"><a href="#">&larr; Ancien</a>
+                                <li id="podcast-apres" class="previous"><a href="#">&larr; Récent</a>
                                 </li>
-                                <li class="next disabled"><a href="#">Récent &rarr;</a>
+                                <li id="podcast-avant" class="next "><a href="#">Ancien &rarr;</a>
                                 </li>
                             </ul>
 
@@ -200,7 +209,7 @@
 
                             <div class="panel panel-default sidebar-menu">
                               <div class="panel-heading">
-                                  <h3 style="font-size: 24px;" class="panel-title">Derniers articles...</h3>
+                                  <h3 style="font-size: 24px;" class="panel-title"><a href="liste_article.php?id_emission=<?=$id; ?>">Derniers articles...</a></h3>
                                 </div>
                             </div>
 
@@ -208,110 +217,48 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="image">
-                                            <a href="blog-post.html">
-                                                <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <h2><a href="post.htmls">Fashion now</a></h2>
-                                        <div class="clearfix">
-                                            <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Politique</a>
-                                            </p>
-                                            <p class="date-comments">
-                                                <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-                                            </p>
-                                        </div>
-                                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                                            Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-                                        </p>
-                                        <br>
-                                    </div>
+                                    <?php
+                                      $sql = "SELECT * FROM articles WHERE id_emission = $id ORDER BY id_article DESC LIMIT 0,3";
+                                      $articles = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="image">
-                                            <a href="blog-post.html">
-                                                <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <h2><a href="post.htmls">Fashion now</a></h2>
-                                        <div class="clearfix">
-                                            <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Gastronomie</a>
-                                            </p>
-                                            <p class="date-comments">
-                                                <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-                                            </p>
-                                        </div>
-                                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                                            Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-                                        </p>
-                                    </div>
+                                      foreach($articles as $article){
 
+                                        $article['contenu_article'] =  strip_tags($article['contenu_article']);
+                                        $article['contenu_article'] = substr($article['contenu_article'],0, 500)."...";
+
+
+                                        if(empty($article['photo_article'])){
+                                          $article['photo_article'] = $emission['photo_emission'];
+                                        }
+                                        ?>
+
+
+                                        <div class="col-md-4 col-sm-4 col-xs-4">
+                                            <div class="image">
+                                                <a href="article.php?id=<?=$article['id_article'];?>">
+                                                    <img src="<?=$article['photo_article'];?>" class="img-responsive" alt="<?=$article['titre_article'];?>">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <h2 style="margin-top : 0; margin-bottom : 5px;"><a href="post.htmls"><?=$article['titre_article'];?></a></h2>
+                                            <div class="clearfix">
+                                                <p class="author-category"><?=$emission['titre_emission'];?></p>
+                                                <p class="date-comments">
+                                                    <i class="fa fa-calendar-o"></i>&nbsp<?=$article['date_article'];?>
+                                                </p>
+                                            </div>
+                                            <p class="intro"><?=$article['contenu_article'];?></p>
+                                            <p class="read-more"><a href="article.php?id=<?=$article['id_article'];?>" class="btn btn-template-main pull-right">Lire plus</a>
+                                            </p>
+                                            <div style="clear:both; margin-bottom: 45px;"></div>
+
+                                        </div>
+
+
+                                      <?php }
+                                    ?>
                                 </div>
-
-                                <br><br>
-
-                                <div class="row">
-
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="image">
-                                            <a href="blog-post.html">
-                                                <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <h2><a href="post.htmls">Fashion now</a></h2>
-                                        <div class="clearfix">
-                                            <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Politique</a>
-                                            </p>
-                                            <p class="date-comments">
-                                                <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-                                            </p>
-                                        </div>
-                                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                                            Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-                                        </p>
-                                        <br>
-                                    </div>
-
-                                    <div class="col-md-2 col-sm-2">
-                                        <div class="image">
-                                            <a href="blog-post.html">
-                                                <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4">
-                                        <h2><a href="post.htmls">Fashion now</a></h2>
-                                        <div class="clearfix">
-                                            <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Gastronomie</a>
-                                            </p>
-                                            <p class="date-comments">
-                                                <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-                                            </p>
-                                        </div>
-                                        <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-                                            Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                        <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-                                        </p>
-                                    </div>
-
-                                </div>
-
-                                <ul class="pager">
-                                    <li class="previous"><a href="#">&larr; Ancien</a>
-                                    </li>
-                                    <li class="next disabled"><a href="#">Récent &rarr;</a>
-                                    </li>
-                                </ul>
 
                             </section>
                         </div>
@@ -382,6 +329,85 @@
 
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+
+    <script type="text/javascript">
+
+    var emission = <?=$id; ?>;
+    var page_podcast = 0;
+    var limite = Math.ceil(<?=$nb_podcast;?>/3)-1;
+
+    $(document).ready(function(){
+    	load_podcasts();
+    });
+
+    function load_podcasts(){
+    	var request = $.ajax({
+    		url:'traitements/ajax/get_podcasts.php',
+    		type:'POST',
+    		data:{
+          'id': emission,
+          'page_podcast': page_podcast,
+        },
+    		dataType : 'json'
+    	});
+
+      request.done(function(data){
+
+        for (var i = 1; i <= 3 ; i++) {
+          $('#img-podcast'+i).attr('src','');
+          $('#titre-podcast'+i).html('');
+          $('#date-podcast'+i).html('');
+          $('#date-podcast'+i).attr('href','');
+        }
+
+        $.each(data, function(key, value){
+          var i = key+1;
+          console.log(value);
+          if(value.photo_podcast == null || value.photo_podcast == ''){
+            var photo = value.photo_emission;
+          } else {
+            var photo = value.photo_podcast;
+          }
+          $('#img-podcast'+i).attr('src',photo);
+          $('#titre-podcast'+i).html(value.titre_podcast);
+          $('#date-podcast'+i).html(value.date_podcast);
+          $('#titre-podcast'+i).attr('href','podcast.php?id='+value.id_podcast);
+        });
+      });
+
+      if(page_podcast == 0){
+        $('#podcast-apres').addClass('disabled');
+      } else if($('#podcast-apres').hasClass('disabled')) {
+        $('#podcast-apres').removeClass('disabled');
+      }
+
+      if(page_podcast == limite){
+        $('#podcast-avant').addClass('disabled');
+      } else if($('#podcast-avant').hasClass('disabled')) {
+        $('#podcast-avant').removeClass('disabled');
+      }
+
+
+    }
+
+    $('#podcast-apres').click(function(e){
+      e.preventDefault();
+      if(page_podcast > 0){
+        page_podcast--;
+      }
+    	load_podcasts();
+
+    })
+
+    $('#podcast-avant').click(function(e){
+      e.preventDefault();
+      if(page_podcast < limite){
+        page_podcast++;
+      }
+    	load_podcasts();
+    })
+
+    </script>
 
 
 
