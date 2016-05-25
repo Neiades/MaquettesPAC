@@ -1,3 +1,6 @@
+<?php
+	include "includes/database.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -98,6 +101,12 @@
 
 			                <div class="row">
 								<div class="col-md-12">
+
+									<?php
+										//$sql = "SELECT  FROM  WHERE  ORDER BY  DESC LIMIT 0,2";
+										//$podcasts = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									?>
+
 									<section class="post">
 										<div class="row">
 			                                <div class="col-md-4">
@@ -149,49 +158,36 @@
 		                    </div>
 
 							<div class="row portfolio">
+								<?php
+									$sql = "SELECT P.id_podcast, P.titre_podcast, P.photo_podcast, P.date_podcast, P.chemin_podcast, E.id_emission, E.titre_emission, E.photo_emission FROM podcasts P, emissions E WHERE P.emission_podcast = E.id_emission ORDER BY P.id_podcast DESC LIMIT 0,3";
+									$podcasts = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									foreach ($podcasts as $podcast){
+										//Verification de la présence d'une photo spécifique au podcast, si oui, l'utiliser, sinon, utiliser la photo par default de l'emission
+										if($podcast['photo_podcast'] == null || $podcast['photo_podcast'] == ""){
+											$photo = $podcast['photo_emission'];
+										} else {
+											$photo = $podcast['photo_podcast'];
+										}
+										?>
 
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Les lectures de Marie</a></h4>
-											<a href="blog-post.html" class="btn btn-template-main"><i class="fa fa-play" aria-hidden="true"></i> Ecouter</a>
-		                                </div>
-		                            </div>
-		                        </div>
+										<div class="col-sm-4">
+				                            <div class="box-image-text blog custom-box">
+				                                <div class="top">
+				                                    <div style="position:relative" class="image">
+				                                        <a href="podcast.php?id=<?=$podcast['id_podcast'];?>"><img style="width:100%;" src="<?=$photo;?>" alt="" class="img-responsive"></a>
+													</div>
+												</div>
+				                                <div class="content">
+													<h4><a href="podcast.php?id=<?=$podcast['id_podcast'];?>"><?=$podcast['titre_podcast'];?></a></h4>
+													<p><a href="emission.php?id=<?=$podcast['id_emission'];?>" class="emission_link"><?=$podcast['titre_emission'];?></a></p>
+													<p>Le : <?=$podcast['date_podcast'];?></p>
+													<a href="podcast.php?id=<?=$podcast['id_podcast'];?>" class="btn btn-template-main"><i class="fa fa-play" aria-hidden="true"></i> Ecouter</a>
+				                                </div>
+				                            </div>
+				                        </div>
 
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Les lectures de Marie</a></h4>
-											<a href="blog-post.html" class="btn btn-template-main"><i class="fa fa-play" aria-hidden="true"></i> Ecouter</a>
-		                                </div>
-		                            </div>
-		                        </div>
-
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Les lectures de Marie</a></h4>
-											<a href="blog-post.html" class="btn btn-template-main"><i class="fa fa-play" aria-hidden="true"></i> Ecouter</a>
-		                                </div>
-		                            </div>
-		                        </div>
-
+									<?php }
+								?>
 							</div>
 
 						</section>
@@ -201,57 +197,46 @@
 							<div class="row">
 		                        <div class="col-md-12">
 		                            <div class="heading">
-		                                <h2>Evenements à venir</h2>
+		                                <h2>Derniers evenements</h2>
 		                            </div>
 		                        </div>
 		                    </div>
 
 							<div class="row portfolio">
+								<?php
+									$sql = "SELECT E.id, E.title, E.start, E.end, E.contenu_event, E.photo_event, T.photo_type_event FROM evenements E, type_event T WHERE E.type_event = T.id_type_event ORDER BY E.id DESC LIMIT 0,3";
+									$evenements = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									foreach ($evenements as $evenement){
 
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-3.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Fête de la saucisse</a></h4>
-											<p>Du 20/05/2015<br>Au 23/05/2015</p>
-											<p>A : Trifouilli les oies</p>
-		                                </div>
-		                            </div>
-		                        </div>
+										if($evenement['photo_event'] == null || $evenement['photo_event'] == ""){
+											$photo = $evenement['photo_type_event'];
+										} else {
+											$photo = $evenement['photo_event'];
+										}
 
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-2.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Fête de la saucisse</a></h4>
-											<p>Du 20/05/2015<br>Au 23/05/2015</p>
-											<p>A : Trifouilli les oies</p>
-										</div>
-		                            </div>
-		                        </div>
+										$contenu_event = strip_tags($evenement['$contenu_event']);
+										if(strlen($contenu_event)>50){
+											$contenu_event = substr($contenu_event,0,50)."...";
+										}
+										?>
 
-								<div class="col-sm-4">
-		                            <div class="box-image-text blog custom-box">
-		                                <div class="top">
-		                                    <div style="position:relative" class="image">
-		                                        <img src="img/portfolio-1.jpg" alt="" class="img-responsive">
-											</div>
-										</div>
-		                                <div class="content">
-											<h4><a href="blog-post.html">Fête de la saucisse</a></h4>
-											<p>Du 20/05/2015<br>Au 23/05/2015</p>
-											<p>A : Trifouilli les oies</p>
-										</div>
-		                            </div>
-		                        </div>
+										<div class="col-sm-4">
+				                            <div class="box-image-text blog custom-box">
+				                                <div class="top">
+				                                    <div style="position:relative" class="image">
+				                                        <a href="evenement.php?id=<?=$evenement['id'];?>"><img style="width:100%;" src="<?=$photo;?>" alt="" class="img-responsive"></a>
+													</div>
+												</div>
+				                                <div class="content">
+													<h4><a href="evenement.php?id=<?=$evenement['id'];?>"><?=$evenement['title'];?></a></h4>
+													<p>Du <?=$evenement['start'];?><br>Au <?=$evenement['end'];?></p>
+													<p><?=$contenu_event;?></p>
+				                                </div>
+				                            </div>
+				                        </div>
+
+									<?php }
+								?>
 
 							</div>
 
@@ -259,6 +244,7 @@
 
 					</div>
 
+					<!-- Widgets Facebook / Twitter -->
 					<div class="col-md-3 col-md-offset-1">
 
 						<div class="row">
