@@ -18,12 +18,21 @@ function map() {
 	    style: 'SMALL',
 	    position: 'TOP_LEFT'
 	},
+<<<<<<< HEAD
 	panControl: true,
 	streetViewControl: false,
 	mapTypeControl: false,
 	overviewMapControl: true,
 	scrollwheel: true,
 	draggable: true,
+=======
+	panControl: false,
+	streetViewControl: false,
+	mapTypeControl: false,
+	overviewMapControl: false,
+	scrollwheel: false,
+	draggable: false,
+>>>>>>> 7b2609e1564d730cf5356cf0b03c39f1ca13296c
 	styles: styles
     });
 
@@ -38,4 +47,8 @@ function map() {
 	 content: '<p>HTML Content</p>'
 	 }*/
     });
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7b2609e1564d730cf5356cf0b03c39f1ca13296c

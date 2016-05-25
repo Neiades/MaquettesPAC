@@ -30,3 +30,30 @@
 	background:#00ACED;
 	color:#fff;
 }
+
+.custom-btn-article{
+	border:1px solid #00ACED;
+	background:transparent;
+	color:#00ACED;
+	padding-left:10px;
+	padding-right:10px;
+	font-weight:bold;
+	transition:0.5s;
+	outline:none;
+}
+.custom-btn-tw:hover{
+	background:#00ACED;
+	color:#fff;
+}
+
+.custom-box{
+	padding-bottom:20px;
+	transition:0.3s;
+	border: 1px solid #fff;
+}
+
+.custom-box:hover{
+	border: 1px solid #6aae7a;
+	box-shadow: 0px 2px 5px 0px rgba(106, 173, 122, 0.7);
+	transform: translateY(-5px);
+}

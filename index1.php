@@ -42,6 +42,7 @@
 		<div id="all">
 			<!-- NAVBAR -->
 			<header><?php include("includes/navigation.php");?></header>
+	        <?php include("includes/modals.php") ?>
 			<div id="heading-breadcrumbs">
 	            <div class="container">
 	                <div class="row">
