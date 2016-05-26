@@ -24,7 +24,7 @@
 		<![endif]-->
 
       <!-- CSS pour full calendar -->
-      <link href='fullcalendar/fullcalendar.css' rel='stylesheet' />
+      <link href='fullcalendar/fullcalendar.min.css' rel='stylesheet' />
       <link href='fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
       <style>
       	#calendar {
