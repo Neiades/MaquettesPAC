@@ -3,7 +3,7 @@
 
 	$id = $_POST['id'];
 	$page = $_POST['page_event'];
-	$limite = page*4;
+	$limite = $page*4;
 
 	if($id != "none"){
 		$sql = "SELECT E.id, E.title, E.start, E.end, E.contenu_event, E.photo_event, E.date_event, E.lieu, T.id_type_event, T.lib_type_event, T.photo_type_event FROM evenements E, type_event T WHERE E.type_event = T.id_type_event AND E.type_event = $id ORDER BY id DESC LIMIT $limite, 4";
