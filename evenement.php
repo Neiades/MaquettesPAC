@@ -9,10 +9,10 @@
   $sql = "SELECT * FROM evenements E , type_event TE WHERE E.type_event = TE.id_type_event AND id = $id";
   $evenement = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-  if(empty($evenement['photo_evenement'])){
+  if(empty($evenement['photo_event'])){
     $photo = $evenement['photo_type_event'];
   } else {
-    $photo = $evenement['photo_evenement'];
+    $photo = $evenement['photo_event'];
   }
 
  ?>
@@ -163,7 +163,7 @@
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="liste_article.php?filtre=event&id_event=<?=$evenement['type_event'];?>"><?=$evenement['lib_type_event'];?></a>
+                                    <li class="active"><a href="liste_evenement.php?id=<?=$evenement['type_event'];?>"><?=$evenement['lib_type_event'];?></a>
                                 </ul>
                             </div>
                         </div>

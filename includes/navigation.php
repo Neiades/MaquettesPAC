@@ -56,12 +56,12 @@ _________________________________________________________ -->
     <div class="navbar-collapse collapse" id="navigation">
 
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown active">
+            <li class="dropdown">
                 <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Radio <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Programmes</a>
+                    <li><a href="calendrier_programmes.php">Grille des programmes</a>
                     </li>
-                    <li><a href="#">Emissions</a>
+                    <li><a href="liste_emission.php">Emissions</a>
                     </li>
                     <li><a href="#">C'était quoi ce titre ?</a>
                     </li>
@@ -71,21 +71,23 @@ _________________________________________________________ -->
             <li class="dropdown">
                 <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Actualité <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Toutes les infos</a>
+                    <li><a href="liste_article.php">Toutes les infos</a>
                     </li>
-                    <li><a href="#">Locale</a>
+                    <li><a href="liste_article.php?filtre=categorie&id=2">Locale</a>
                     </li>
-                    <li><a href="#">Régionale</a>
-                    </li>
-                    <li><a href="#">Météo</a>
-                    </li>
-                    <li><a href="#">Routes</a>
+                    <li><a href="liste_article.php?filtre=categorie&id=3">Régionale</a>
                     </li>
                   </ul>
               </li>
 
               <li class="dropdown">
-                  <a href="calendrier.php" class="dropdown-toggle">Agenda</b></a>
+                <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Agenda <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="calendrier_evenements.php">Calendrier</a>
+                    </li>
+                    <li><a href="liste_evenement.php">Tous les événements</a>
+                    </li>
+                  </ul>
               </li>
 
             <li class="dropdown">
@@ -98,10 +100,6 @@ _________________________________________________________ -->
                     <li><a href="#">Entreprises</a>
                     </li>
                 </ul>
-
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Galerie</b></a>
-            </li>
 
         </ul>
 

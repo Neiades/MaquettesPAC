@@ -21,8 +21,10 @@
         $titre = $emission['titre_emission'];
         $photo = $emission['photo_emission'];
 
-        $filtre = "emission";
+        $filtre = "Emission";
         $id = $article['id_emission'];
+
+        $url = "emission.php?id=".$id;
 
   } else if($article['categ_article'] != null){
 
@@ -33,8 +35,10 @@
         $titre = $categorie['lib_cat'];
         $photo = $categorie['photo_cat'];
 
-        $filtre = "categorie";
+        $filtre = "Categorie";
         $id = $article['categ_article'];
+
+        $url = "liste_article.php?filtre=categorie&id=".$id;
 
     }
 
@@ -111,7 +115,7 @@
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                              <li><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id?>"><?=$titre;?></a></li>
+                              <li><a href="<?=$url;?>"><?=$titre;?></a></li>
                             <li><?=$article['titre_article'];?></li>
                         </ul>
 
@@ -180,7 +184,7 @@
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id?>"><?=$titre;?></a>
+                                    <li class="active"><a href="<?=$url;?>"><?=$titre;?></a>
                                 </ul>
                             </div>
                         </div>
