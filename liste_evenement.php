@@ -75,21 +75,54 @@
 			<div id="content">
 	            <div class="container">
 	                <div class="row">
-						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+						<div class="col-md-8" id="blog-listing-medium">
 
-							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Les événements dans la région !</h1></p></center></div></div>
+							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Les événements de la région !</h1></p></center></div></div>
 							<br><br><br>
 
 							<div id="container-evenement">
-
 							</div>
 
 							<ul class="pager">
-								<li class="previous" id="article-recent"><a href="#">&larr; Récent</a></li>
-								<li class="next" id="article-ancien"><a href="#">Ancien &rarr;</a></li>
+								<li class="previous" id="evenement-recent"><a href="#">&larr; Récent</a></li>
+								<li class="next" id="evenement-ancien"><a href="#">Ancien &rarr;</a></li>
 							</ul>
 
                     	</div>
+						<div class="col-md-3 col-md-offset-1">
+							<div class="hidden-xs hidden-sm" style="height:187px;"></div>
+							<div class="panel panel-default sidebar-menu">
+	                            <div class="panel-heading">
+	                                <h3 class="panel-title">Catégories</h3>
+	                            </div>
+
+	                            <div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<?php
+											$sql = "SELECT id_type_event, lib_type_event FROM type_event";
+											$type_events = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+											foreach ($type_events as $type_event) {
+
+												if($id == $type_event['id_type_event']){
+													$active = true;
+												} else {
+													$active = false;
+												}
+
+												?>
+				                                    <li<?php if($active){ echo " class='active'"; } ?>><a href="liste_evenement.php?id=<?=$type_event['id_type_event'];?>"><?=$type_event['lib_type_event'];?></a>
+											<?php }
+											if($id == "none"){ ?>
+												<li class='active'><a href="liste_evenement.php">Tous</a>
+											<?php } else { ?>
+												<li><a href="liste_evenement.php">Tous</a>
+											<?php }
+										?>
+									</ul>
+	                            </div>
+	                        </div>
+						</div>
+
 	                </div>
 	            </div>
 	        </div>
@@ -142,21 +175,21 @@
 						photo = value.photo_event;
 					}
 
-					var html_evenement = '<section class="post"><div class="row"><div class="col-md-3"><div class="image"><a href="evenement.php?id='+value.id+'"><img src="'+photo+'" class="img-responsive" alt="Example blog post alt"></a></div></div><div class="col-md-9"><h2><a href="evenement.php?id='+value.id+'">'+value.title+'</a></h2><div class="clearfix"><p class="author-category">Lieu : '+value.lieu+'</p><p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>Du : '+value.start+' Au : '+value.start+'</p></div><p class="intro">'+value.contenu_event+'</p><p class="read-more"><a href="evenement.php?id='+value.id+'" class="btn btn-template-main">Lire plus</a></p></div></div></section>';
+					var html_evenement = '<section class="post"><div style="padding-bottom:0px;" class="row custom-box"><div style="padding-left:0;padding-right:0;" class="col-md-3"><div style="margin-bottom:0px;" class="image"><a href="evenement.php?id='+value.id+'"><img src="'+photo+'" style="width:100%;" class="img-responsive" alt=""></a></div></div><div style="padding-right:0;padding-left:0;" class="col-md-9"><h2 style="margin-left:10px;margin-bottom:3px;margin-top:5px;"><a href="evenement.php?id='+value.id+'">'+value.title+'</a></h2><div class="clearfix"><p style="margin-left:10px;" class="author-category">Lieu : '+value.lieu+'</p><p style="margin-right:10px;" class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>Du : '+value.start+' Au : '+value.start+'</p></div><p style="margin-right:10px;margin-left:10px;" class="intro">'+value.contenu_event+'</p><p class="read-more"><a style="margin-right:9px;" href="evenement.php?id='+value.id+'" class="btn btn-template-main">Lire plus</a></p></div></div></section>';
 					$('#container-evenement').append(html_evenement);
 
 				});
 
 				if(page_event == 0){
-		          $('#article-ancien').addClass('disabled');
-		        } else if($('#article-ancien').hasClass('disabled')) {
-		          $('#article-ancien').removeClass('disabled');
+		          $('#evenement-recent').addClass('disabled');
+			  } else if($('#evenement-recent').hasClass('disabled')) {
+		          $('#evenement-recent').removeClass('disabled');
 		        }
 
-		        if(page_event == limite){
-		          $('#article-recent').addClass('disabled');
-		        } else if($('#article-recent').hasClass('disabled')) {
-		          $('#article-recent').removeClass('disabled');
+		        if(page_event == limite || limite == -1){
+		          $('#evenement-ancien').addClass('disabled');
+			  } else if($('#evenement-ancien').hasClass('disabled')) {
+		          $('#evenement-ancien').removeClass('disabled');
 		        }
 			});
 
@@ -165,7 +198,7 @@
 			})
 		}
 
-		$('#article-ancien').click(function(e){
+		$('#evenement-recent').click(function(e){
 	      e.preventDefault();
 	      if(page_event > 0){
 	        page_event--;
@@ -174,7 +207,7 @@
 
 	    })
 
-	    $('#article-recent').click(function(e){
+	    $('#evenement-ancien').click(function(e){
 	      e.preventDefault();
 	      if(page_event < limite){
 	        page_event++;
