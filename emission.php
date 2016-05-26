@@ -13,6 +13,7 @@
   $nb_podcast = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
   $nb_podcast = $nb_podcast['qte'];
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
