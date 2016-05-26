@@ -1,3 +1,20 @@
+<?php
+	include "includes/database.php";
+	if(isset($_GET['id'])){
+		$id = $_GET['id'];
+
+		$sql = "SELECT count(id) as qte FROM evenements WHERE type_event = $id";
+	    $nb_evenement = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+	    $nb_evenement = $nb_evenement['qte'];
+
+	} else {
+		$id = "none";
+
+		$sql = "SELECT count(id) as qte FROM evenements";
+	    $nb_evenement = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+	    $nb_evenement = $nb_evenement['qte'];
+	}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -58,125 +75,46 @@
 			<div id="content">
 	            <div class="container">
 	                <div class="row">
-										<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
 
-											<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Les événements dans la région !</h1></p></center></div></div>
-											<br><br><br>
+							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Les événements dans la région !</h1></p></center></div></div>
+							<br><br><br>
 
-							<section class="post">
-	                            <div class="row">
+							<div id="container-evenement">
 
-	                                <div class="col-md-3">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-9">
-	                                    <h2><a href="post.htmls">Nom evenement</a></h2>
-																			<div class="clearfix">
-	                                        <p class="author-category">Lieu : Trifouilli les oies</p>
-	                                        <p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-	                                            <a href="blog-post.html">Du : June 20, 2013</a>
-	                                            <a href="blog-post.html">Au : June 23, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+								<section class="post">
+		                            <div class="row">
 
-							<section class="post">
-												<div class="row">
+		                                <div class="col-md-3">
+		                                    <div class="image">
+		                                        <a href="blog-post.html">
+		                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
+		                                        </a>
+		                                    </div>
+		                                </div>
+		                                <div class="col-md-9">
+		                                    <h2><a href="post.htmls">Nom evenement</a></h2>
+																				<div class="clearfix">
+		                                        <p class="author-category">Lieu : Trifouilli les oies</p>
+		                                        <p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
+		                                            <a href="blog-post.html">Du : June 20, 2013</a>
+		                                            <a href="blog-post.html">Au : June 23, 2013</a>
+		                                        </p>
+		                                    </div>
+		                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
+		                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+		                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
+		                                    </p>
+		                                </div>
+		                            </div>
+		                        </section>
 
-														<div class="col-md-3">
-																<div class="image">
-																		<a href="blog-post.html">
-																				<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-																		</a>
-																</div>
-														</div>
-														<div class="col-md-9">
-																<h2><a href="post.htmls">Nom evenement</a></h2>
-																<div class="clearfix">
-																		<p class="author-category">Lieu : Trifouilli les oies</p>
-																		<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-																				<a href="blog-post.html">Du : June 20, 2013</a>
-																				<a href="blog-post.html">Au : June 23, 2013</a>
-																		</p>
-																</div>
-																<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-																		Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-																<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-																</p>
-														</div>
-												</div>
-	                        </section>
+							</div>
 
-							<section class="post">
-												<div class="row">
-
-														<div class="col-md-3">
-																<div class="image">
-																		<a href="blog-post.html">
-																				<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-																		</a>
-																</div>
-														</div>
-														<div class="col-md-9">
-																<h2><a href="post.htmls">Nom evenement</a></h2>
-																<div class="clearfix">
-																		<p class="author-category">Lieu : Trifouilli les oies</p>
-																		<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-																				<a href="blog-post.html">Du : June 20, 2013</a>
-																				<a href="blog-post.html">Au : June 23, 2013</a>
-																		</p>
-																</div>
-																<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-																		Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-																<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-																</p>
-														</div>
-												</div>
-                    </section>
-
-										<section class="post">
-															<div class="row">
-
-																	<div class="col-md-3">
-																			<div class="image">
-																					<a href="blog-post.html">
-																							<img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-																					</a>
-																			</div>
-																	</div>
-																	<div class="col-md-9">
-																			<h2><a href="post.htmls">Nom evenement</a></h2>
-																			<div class="clearfix">
-																					<p class="author-category">Lieu : Trifouilli les oies</p>
-																					<p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>
-																							<a href="blog-post.html">Du : June 20, 2013</a>
-																							<a href="blog-post.html">Au : June 23, 2013</a>
-																					</p>
-																			</div>
-																			<p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-																					Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-																			<p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Lire plus</a>
-																			</p>
-																	</div>
-															</div>
-			                    </section>
-
-													<ul class="pager">
-															<li class="previous"><a href="#">&larr; Ancien</a>
-															</li>
-															<li class="next disabled"><a href="#">Récent &rarr;</a>
-															</li>
-													</ul>
+							<ul class="pager">
+								<li class="previous" id="article-recent"><a href="#">&larr; Récent</a></li>
+								<li class="next" id="article-ancien"><a href="#">Ancien &rarr;</a></li>
+							</ul>
 
                     	</div>
 	                </div>
@@ -200,5 +138,78 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/jquery.parallax-1.1.3.js"></script>
 	<script src="js/front.js"></script>
+
+	<script>
+		var page_event = 0;
+		var limite = Math.ceil(<?=$nb_evenement;?>/4)-1;
+
+		$(document).ready(function(){
+			load_events();
+		});
+
+		function load_events(){
+			var request = $.ajax({
+	    		url:'traitements/ajax/get_evenements.php',
+	    		type:'POST',
+	    		data:{
+	          		'id': '<?=$id;?>',
+	          		'page_event': page_event,
+	        	},
+	    		dataType : 'json'
+	    	});
+
+			request.done(function(data){
+				$('#container-evenement').empty();
+
+				$.each(data, function(key, value){
+					var photo;
+					if(value.photo_event == null || value.photo_event == ''){
+						photo = value.photo_type_event;
+					} else {
+						photo = value.photo_event;
+					}
+
+					var html_evenement = '<section class="post"><div class="row"><div class="col-md-3"><div class="image"><a href="evenement.php?id='+value.id+'"><img src="'+photo+'" class="img-responsive" alt="Example blog post alt"></a></div></div><div class="col-md-9"><h2><a href="evenement.php?id='+value.id+'">'+value.title+'</a></h2><div class="clearfix"><p class="author-category">Lieu : '+value.lieu+'</p><p class="date-comments"><i class="fa fa-calendar-o" style="margin-right:10px;"></i>Du : '+value.start+' Au : '+value.start+'</p></div><p class="intro">'+value.contenu_event+'</p><p class="read-more"><a href="evenement.php?id='+value.id+'" class="btn btn-template-main">Lire plus</a></p></div></div></section>';
+					$('#container-evenement').append(html_evenement);
+
+				});
+
+				if(page_event == 0){
+		          $('#article-ancien').addClass('disabled');
+		        } else if($('#article-ancien').hasClass('disabled')) {
+		          $('#article-ancien').removeClass('disabled');
+		        }
+
+		        if(page_event == limite){
+		          $('#article-recent').addClass('disabled');
+		        } else if($('#article-recent').hasClass('disabled')) {
+		          $('#article-recent').removeClass('disabled');
+		        }
+			});
+
+			request.fail(function(data){
+				console.log(data);
+			})
+		}
+
+		$('#article-ancien').click(function(e){
+	      e.preventDefault();
+	      if(page_event > 0){
+	        page_event--;
+	      }
+	    	load_events();
+
+	    })
+
+	    $('#article-recent').click(function(e){
+	      e.preventDefault();
+	      if(page_event < limite){
+	        page_event++;
+	      }
+	    	load_events();
+	    })
+
+
+	</script>
 
 </html>

@@ -73,19 +73,17 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="project owl-carousel">
-							<div class="item">
-								<img src="img/main-slider1.jpg" alt="" class="img-responsive">
-							</div>
-							<div class="item">
-								<img class="img-responsive" src="img/main-slider2.jpg" alt="">
-							</div>
-							<div class="item">
-								<img class="img-responsive" src="img/main-slider3.jpg" alt="">
-							</div>
-							<div class="item">
-								<img class="img-responsive" src="img/main-slider4.jpg" alt="">
+						<div class="col-md-8">
+							<div class="project owl-carousel">
+								<?php
+									$sql = "SELECT * FROM banniere";
+									$images = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									foreach($images as $image){ ?>
+										<div class="item">
+											<img src="<?=$image['photo_banniere'];?>" alt="" class="img-responsive">
+										</div>
+									<?php }
+								?>
 							</div>
 						</div>
 
@@ -114,8 +112,8 @@
 												$emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 												$categ = $emission['titre_emission'];
 
-												$filtre = "emission";
 												$id = $emission['id_emission'];
+												$url = "emission.php?id=".$id;
 
 												$photo = $emission['photo_emission'];
 
@@ -128,6 +126,7 @@
 
 												$filtre = "categorie";
 												$id = $categorie['id_cat'];
+												$url = "liste_article.php?filtre=".$filtre."&id=".$id;
 
 												$photo = $categorie['photo_cat'];
 
@@ -138,7 +137,7 @@
 											}
 
 											$contenu_article = strip_tags($article['contenu_article']);
-											if(strlen($contenu_article)>50){
+											if(strlen($contenu_article)>300){
 												$contenu_article = substr($contenu_article,0,300)."...";
 											}
 
@@ -157,7 +156,7 @@
 					                                <div class="col-md-8">
 					                                    <h2 class="hidden-sm hidden-xs" style="margin-top:0;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
 														<h2 class="hidden-md hidden-lg" style="margin-top:10px;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
-					                                    <p class="author-category"><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id;?>"><?=$categ;?></a> <?=$article['date_article'];?></p>
+					                                    <p class="author-category"><a href="<?=$url;?>"><?=$categ;?></a> <?=$article['date_article'];?></p>
 														<p><?=$contenu_article;?></p>
 													</div>
 					                            </div>

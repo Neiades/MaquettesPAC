@@ -9,10 +9,19 @@
   $sql = "SELECT * FROM evenements E , type_event TE WHERE E.type_event = TE.id_type_event AND id = $id";
   $evenement = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-  if(empty($evenement['photo_evenement'])){
+	$date_publication = date_create($evenement['date_event']);
+	$date_publication = date_format($date_publication, 'd/m/Y');
+
+	$date_debut = date_create($evenement['start']);
+	$date_debut = date_format($date_debut, 'd/m/Y');
+
+	$date_fin = date_create($evenement['end']);
+	$date_fin = date_format($date_fin, 'd/m/Y');
+
+  if(empty($evenement['photo_event'])){
     $photo = $evenement['photo_type_event'];
   } else {
-    $photo = $evenement['photo_evenement'];
+    $photo = $evenement['photo_event'];
   }
 
  ?>
@@ -105,9 +114,9 @@
 
                         <!-- Titre de l'article + date et auteur -->
                         <p class="lead"><h1><?=$evenement['title'];?></h1></p>
-                        <p class="text-muted text-uppercase mb-small text-right">Publié le <?=$evenement['date_event'];?></p>
-                        <p><h4>Début : <?=$evenement['start'];?></h4></p>
-                        <p><h4>Fin : <?=$evenement['end'];?></h4></p>
+                        <p class="text-muted text-uppercase mb-small text-right">Publié le <?=$date_publication;?></p>
+                        <p><h4>Début : <?=$date_debut;?></h4></p>
+                        <p><h4>Fin : <?=$date_fin;?></h4></p>
                         <p><h4>Lieu : <?=$evenement['lieu'];?></h4></p>
                         <?php
                           if($evenement['url']){
