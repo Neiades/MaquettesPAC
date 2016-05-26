@@ -1,3 +1,27 @@
+<?php
+	include "includes/database.php";
+
+	if(isset($_GET['filtre']) && isset($_GET['id'])){
+		$id = $_GET['id'];
+		switch ($_GET['filtre']){
+			case "categorie":
+				$sql = "SELECT count(*) as qte FROM articles A, categories C WHERE A.categ_article = C.id_cat AND C.id_cat = $id";
+				$nb_article = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+			    $nb_article = $nb_article['qte'];
+				break;
+
+			case "emission":
+				$sql = "SELECT count(*) as qte FROM articles A, emissions E WHERE A.id_emission = E.id_emission AND E.id_emission = $id";
+				$nb_article = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+			    $nb_article = $nb_article['qte'];
+				break;
+		}
+	} else {
+		$sql = "SELECT count(*) as qte FROM articles";
+		$nb_article = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+		$nb_article = $nb_article['qte'];
+	}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -63,90 +87,14 @@
 							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Nos articles</h1></p></center></div></div>
 							<br><br><br>
 
-							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Fashion now</a></h2>
-	                                    <div class="clearfix">
-	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
-	                                        </p>
-	                                        <p class="date-comments">
-	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+							<div id="container-articles">
 
-													<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="video">
-	                                        <div class="embed-responsive embed-responsive-4by3">
-	                                            <iframe class="embed-responsive-item" src="//www.youtube.com/embed/upZJpGrppJA"></iframe>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Post with video</a></h2>
-	                                    <div class="clearfix">
-	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
-	                                        </p>
-	                                        <p class="date-comments">
-	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
-
-	                        <section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Fashion now</a></h2>
-	                                    <div class="clearfix">
-	                                        <p class="author-category">Par <a href="#">John Snow</a> | <a href="blog.html">Webdesign</a>
-	                                        </p>
-	                                        <p class="date-comments">
-	                                            <a href="blog-post.html"><i class="fa fa-calendar-o"></i> June 20, 2013</a>
-	                                        </p>
-	                                    </div>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-	                                    <p class="read-more"><a href="blog-post.html" class="btn btn-template-main">Continuer la lecture</a>
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+							</div>
 
 	                        <ul class="pager">
-	                            <li class="previous"><a href="#">&larr; Older</a>
-	                            </li>
-	                            <li class="next disabled"><a href="#">Newer &rarr;</a>
-	                            </li>
-	                        </ul>
+								<li class="previous" id="article-recent"><a href="#">&larr; Récent</a></li>
+								<li class="next" id="article-ancien"><a href="#">Ancien &rarr;</a></li>
+							</ul>
                     	</div>
 	                </div>
 	            </div>
@@ -169,5 +117,90 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/jquery.parallax-1.1.3.js"></script>
 	<script src="js/front.js"></script>
+	<script>
+
+		var page_article = 0;
+		var limite = Math.ceil(<?=$nb_article;?>/4)-1;
+
+		$(document).ready(function(){
+			load_articles();
+		});
+
+		function load_articles(){
+			var request = $.ajax({
+				url:'traitements/ajax/get_articles.php',
+	    		type:'POST',
+				<?php
+					if(isset($_GET['filtre']) && isset($_GET['id'])){ ?>
+						data:{
+			          		'id': '<?=$_GET['id'];?>',
+							'filtre': '<?=$_GET['filtre'];?>',
+			          		'page': page_article,
+			        	},
+					<?php } else { ?>
+						data:{
+							'page': page_article,
+						},
+					<?php }
+				?>
+	    		dataType : 'json'
+			});
+			request.done(function(data){
+
+				$('#container-articles').empty();
+				$.each(data, function(key, value){
+					var photo;
+					if(value.photo_article == null || value.photo_article == ''){
+						photo = value.photo_categ;
+					} else {
+						photo = value.photo_article;
+					}
+
+					var url;
+					if(value.type == "emission"){
+						url = "emission.php?id="+value.id_categ;
+					} else if(value.type == "categorie"){
+						url = "liste_article.php?filtre=categorie&id="+value.id_categ;
+					}
+
+					var html_evenement = '<section class="post"><div class="row"><div class="col-md-4"><div class="image"><a href="article.php?id='+value.id+'"><img src="'+photo+'" class="img-responsive" alt=""></a></div></div><div class="col-md-8"><h2><a href="article.php?id='+value.id+'">'+value.titre+'</a></h2><div class="clearfix"><p class="author-category"><a href="'+url+'">'+value.lib_categ+'</a></p><p class="date-comments"><i class="fa fa-calendar-o"></i> '+value.date+'</p></div><p class="intro">'+value.contenu+'</p><p class="read-more"><a href="article.php?id='+value.id+'" class="btn btn-template-main">Continuer la lecture</a></p></div></div></section>';
+					$('#container-articles').append(html_evenement);
+
+					if(page_article == 0){
+			          $('#article-recent').addClass('disabled');
+			        } else if($('#article-recent').hasClass('disabled')) {
+			          $('#article-recent').removeClass('disabled');
+			        }
+
+			        if(page_article == limite || limite == -1){
+			          $('#article-ancien').addClass('disabled');
+				  } else if($('#article-ancien').hasClass('disabled')) {
+			          $('#article-ancien').removeClass('disabled');
+			        }
+
+
+				});
+			});
+
+			$('#article-recent').click(function(e){
+		      e.preventDefault();
+		      if(page_article > 0){
+		        page_article--;
+		      }
+		    	load_articles();
+
+		    })
+
+		    $('#article-ancien').click(function(e){
+		      e.preventDefault();
+		      if(page_article < limite){
+		        page_article++;
+		      }
+		    	load_articles();
+		    })
+
+		}
+
+	</script>
 
 </html>

@@ -19,7 +19,6 @@
 	    <!-- Theme stylesheet, if possible do not edit this stylesheet -->
 	    <link href="css/style.green.css" rel="stylesheet" id="theme-stylesheet">
 	    <!-- Custom stylesheet - for your changes -->
-	    <link href="css/custom.css" rel="stylesheet">
 	    <!-- Responsivity for older IE -->
 	    <!--[if lt IE 9]>
 	        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -39,6 +38,8 @@
 
 	    <link href="css/owl.carousel.css" rel="stylesheet">
 	    <link href="css/owl.theme.css" rel="stylesheet">
+
+		<link href="css/custom.css" rel="stylesheet">
 	</head>
 
 	<body>
@@ -92,7 +93,7 @@
 							<div class="row">
 		                        <div class="col-md-12">
 		                            <div class="heading">
-		                                <h2>Derniers Articles</h2>
+		                                <a class="title_link" href="liste_article.php"><h2>Derniers Articles</h2></a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -144,7 +145,7 @@
 											?>
 
 
-											<section class="post">
+											<section class="post custom-box">
 												<div class="row">
 					                                <div class="col-md-4">
 					                                    <div class="image">
@@ -154,10 +155,10 @@
 					                                    </div>
 					                                </div>
 					                                <div class="col-md-8">
-					                                    <h2 class="hidden-sm hidden-xs" style="margin-top:0;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
-														<h2 class="hidden-md hidden-lg" style="margin-top:10px;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
-					                                    <p class="author-category"><a href="<?=$url;?>"><?=$categ;?></a> <?=$article['date_article'];?></p>
-														<p><?=$contenu_article;?></p>
+					                                    <h2 class="hidden-sm hidden-xs" style="margin-left:10px;margin-top:0;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
+														<h2 class="hidden-md hidden-lg" style="margin-left:10px;margin-top:10px;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
+					                                    <p style="margin-left:10px;" class="author-category"><a href="<?=$url;?>"><?=$categ;?></a> <?=$article['date_article'];?></p>
+														<p style="margin-left:10px;"><?=$contenu_article;?></p>
 													</div>
 					                            </div>
 											</section>
@@ -175,7 +176,7 @@
 							<div class="row">
 		                        <div class="col-md-12">
 		                            <div class="heading">
-		                                <h2>Derniers Podcasts</h2>
+		                                <a href="liste_podcast.php"><h2>Derniers Podcasts</h2></a>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -220,7 +221,7 @@
 							<div class="row">
 		                        <div class="col-md-12">
 		                            <div class="heading">
-		                                <h2>Derniers evenements</h2>
+		                                <a href="liste_evenement.php"><h2>Derniers evenements</h2></a>
 		                            </div>
 		                        </div>
 		                    </div>

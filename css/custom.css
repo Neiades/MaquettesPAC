@@ -61,3 +61,11 @@
 .emission_link{
 	color:#797979;
 }
+
+.title_link{
+	transition:0.3s;
+	color:#333333;
+}
+.title_link:hover{
+	color:#6aae7a;
+}
