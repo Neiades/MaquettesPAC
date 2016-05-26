@@ -1,5 +1,7 @@
 <!-- *** TOP *** -->
 <?php
+  include"includes/database.php";
+
   $sql = "SELECT * FROM categories";
   $categories = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 ?>
