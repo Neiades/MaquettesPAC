@@ -103,45 +103,69 @@
 								<div class="col-md-12">
 
 									<?php
-										//$sql = "SELECT  FROM  WHERE  ORDER BY  DESC LIMIT 0,2";
-										//$podcasts = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+										$sql = "SELECT id_article, date_article, titre_article, contenu_article, photo_article, categ_article, id_emission FROM articles ORDER BY id_article DESC LIMIT 0,2";
+										$articles = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+										foreach ($articles as $article) {
+											//var_dump($article);
+											if($article['id_emission'] != null){
+
+												$id_emission = $article['id_emission'];
+												$sql = "SELECT id_emission, titre_emission, photo_emission FROM emissions WHERE id_emission = $id_emission";
+												$emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+												$categ = $emission['titre_emission'];
+
+												$filtre = "emission";
+												$id = $emission['id_emission'];
+
+												$photo = $emission['photo_emission'];
+
+											} else if($article['categ_article'] != null){
+
+												$id_categ = $article['categ_article'];
+												$sql = "SELECT id_cat, lib_cat, photo_cat FROM categories WHERE id_cat = $id_categ";
+												$categorie = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+												$categ = $categorie['lib_cat'];
+
+												$filtre = "categorie";
+												$id = $categorie['id_cat'];
+
+												$photo = $categorie['photo_cat'];
+
+											}
+
+											if($article['photo_article'] != null){
+												$photo = $article['photo_article'];
+											}
+
+											$contenu_article = strip_tags($article['contenu_article']);
+											if(strlen($contenu_article)>50){
+												$contenu_article = substr($contenu_article,0,300)."...";
+											}
+
+											?>
+
+
+											<section class="post">
+												<div class="row">
+					                                <div class="col-md-4">
+					                                    <div class="image">
+					                                        <a href="article.php?id=<?=$article['id_article'];?>">
+					                                            <img style="width:100%;" src="<?=$photo;?>" class="img-responsive" alt="">
+					                                        </a>
+					                                    </div>
+					                                </div>
+					                                <div class="col-md-8">
+					                                    <h2 class="hidden-sm hidden-xs" style="margin-top:0;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
+														<h2 class="hidden-md hidden-lg" style="margin-top:10px;margin-bottom:10px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
+					                                    <p class="author-category"><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id;?>"><?=$categ;?></a> <?=$article['date_article'];?></p>
+														<p><?=$contenu_article;?></p>
+													</div>
+					                            </div>
+											</section>
+
+
+										<?php }
 									?>
-
-									<section class="post">
-										<div class="row">
-			                                <div class="col-md-4">
-			                                    <div class="image">
-			                                        <a href="blog-post.html">
-			                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-			                                        </a>
-			                                    </div>
-			                                </div>
-			                                <div class="col-md-8">
-			                                    <h2 class="hidden-sm hidden-xs" style="margin-top:0;margin-bottom:10px;"><a href="post.htmls">Titre Article</a></h2>
-												<h2 class="hidden-md hidden-lg" style="margin-top:10px;margin-bottom:10px;"><a href="post.htmls">Titre Article</a></h2>
-			                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-												<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
-											</div>
-			                            </div>
-									</section>
-
-									<section class="post">
-										<div class="row">
-			                                <div class="col-md-4">
-			                                    <div class="image">
-			                                        <a href="blog-post.html">
-			                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-			                                        </a>
-			                                    </div>
-			                                </div>
-			                                <div class="col-md-8">
-			                                    <h2 class="hidden-sm hidden-xs" style="margin-top:0;margin-bottom:10px;"><a href="post.htmls">Titre Article</a></h2>
-												<h2 class="hidden-md hidden-lg" style="margin-top:10px;margin-bottom:10px;"><a href="post.htmls">Titre Article</a></h2>
-			                                    <p class="author-category">By <a href="#">John Snow</a> in <a href="blog.html">Webdesign</a>
-												<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
-											</div>
-			                            </div>
-									</section>
 								</div>
 			                </div>
 
@@ -244,39 +268,78 @@
 
 					</div>
 
-					<!-- Widgets Facebook / Twitter -->
 					<div class="col-md-3 col-md-offset-1">
 
 						<div class="row">
 							<div class="hidden-xs hidden-sm" style="height:103px;"></div>
-							<section>
-								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
-									<div class="panel panel-default sidebar-menu">
-			                            <div class="panel-heading">
-			                                <h3 class="panel-title"><i class="fa fa-tint" style="margin-right:10px;" aria-hidden="true"></i>Alerte Météo</h3>
-			                            </div>
-			                            <div class="panel-body text-widget">
-			                                <p>Risque de verglas dans la région !</p>
-											<p style="color:#9C9C9C;">Suite aux récentes précipitations, du verglas pourait se former sur le bas coté ! Soyez prudents<p>
-			                            </div>
-			                        </div>
-								</div>
 
-								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
-									<div class="panel panel-default sidebar-menu">
-			                            <div class="panel-heading">
-			                                <h3 class="panel-title"><i class="fa fa-truck" style="margin-right:10px;" aria-hidden="true"></i>Alerte Routière</h3>
-			                            </div>
-			                            <div class="panel-body text-widget">
-			                                <p>Accident sur l'A20</p>
-											<p style="color:#9C9C9C;">Un camion entre en colision avec un troupeau de vaches !<p>
-			                            </div>
-			                        </div>
-								</div>
+
+							<section>
+								<!-- Alertes Metéo -->
+								<?php
+									$sql = "SELECT titre_alerte, contenu_alerte FROM alertes WHERE type_alerte = 1 AND NOW() BETWEEN date_debut_alerte AND date_fin_alerte ORDER BY id_alerte DESC;";
+									$alertes_meteo = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									if(count($alertes_meteo)>0){ ?>
+
+										<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
+											<div class="panel panel-default sidebar-menu">
+					                            <div class="panel-heading">
+					                                <h3 class="panel-title"><i class="fa fa-tint" style="margin-right:10px;" aria-hidden="true"></i>Alerte Météo</h3>
+					                            </div>
+
+												<?php
+
+												foreach ($alertes_meteo as $key => $alerte_meteo){
+													$contenu_alerte = strip_tags($alerte_meteo['contenu_alerte']);
+													if($key > 0){ ?> <hr style="border:1px solid #6aae7a;"> <?php }
+													?>
+													<div class="panel-body text-widget">
+						                                <p><?=$alerte_meteo['titre_alerte'];?></p>
+														<p style="color:#9C9C9C;"><?=$contenu_alerte;?><p>
+						                            </div>
+
+												<?php } ?>
+
+											</div>
+										</div>
+
+									<?php }
+								?>
+
+								<!-- Alertes Routières -->
+								<?php
+									$sql = "SELECT titre_alerte, contenu_alerte FROM alertes WHERE type_alerte = 2 AND NOW() BETWEEN date_debut_alerte AND date_fin_alerte ORDER BY id_alerte DESC;";
+									$alertes_route = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+									if(count($alertes_route)>0){ ?>
+
+										<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
+											<div class="panel panel-default sidebar-menu">
+					                            <div class="panel-heading">
+					                                <h3 class="panel-title"><i class="fa fa-truck" style="margin-right:10px;" aria-hidden="true"></i>Alerte Routière</h3>
+					                            </div>
+
+												<?php
+
+												foreach ($alertes_route as $key => $alerte_route){
+													$contenu_alerte = strip_tags($alerte_route['contenu_alerte']);
+													if($key > 0){ ?> <hr style="border:1px solid #6aae7a;"> <?php }
+													?>
+													<div class="panel-body text-widget">
+														<p><?=$alerte_route['titre_alerte'];?></p>
+														<p style="color:#9C9C9C;"><?=$contenu_alerte;?><p>
+													</div>
+
+												<?php } ?>
+
+											</div>
+										</div>
+
+									<?php }
+								?>
 							</section>
 							<div style="clear:both;">
 							<section>
-
+								<!-- Widget Facebook -->
 								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
 									<div class="panel panel-default sidebar-menu">
 
@@ -299,7 +362,7 @@
 										</div>
 			                        </div>
 								</div>
-
+								<!-- Widget Twitter -->
 								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
 									<div class="panel panel-default sidebar-menu">
 			                            <div class="panel-heading">
