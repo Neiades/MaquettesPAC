@@ -38,7 +38,6 @@
 		<div id="all">
 			<!-- NAVBAR -->
 			<header><?php include("includes/navigation.php");?></header>
-	        <?php include("includes/modals.php") ?>
 			<div id="heading-breadcrumbs">
 	            <div class="container">
 	                <div class="row">
@@ -60,14 +59,6 @@
 
 						<div class="col-md-8">
 	                        <section>
-	                            <div class="heading">
-	                                <h2>Qui sommes nous ?</h2>
-	                            </div>
-
-	                            <p class="lead">Are you curious about something? Do you have some kind of problem with our products? As am hastily invited settled at limited civilly fortune me. Really spring in extent an by. Judge but built gay party world. Of so am he remember
-	                                although required. Bachelor unpacked be advanced at. Confined in declared marianne is vicinity.</p>
-	                            <p>Please feel free to contact us, our customer service center is working for you 24/7.</p>
-
 	                            <div class="heading">
 	                                <h3>Formulaire de contact</h3>
 	                            </div>
@@ -106,7 +97,7 @@
 	                                    </div>
 
 	                                    <div class="col-sm-12 text-center">
-	                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-envelope-o"></i> Send message</button>
+	                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-envelope-o"></i> Envoyer message</button>
 
 	                                    </div>
 	                                </div>
@@ -117,26 +108,16 @@
 
 						<div class="col-md-4">
 	                        <section>
-	                            <h3 class="text-uppercase">Address</h3>
-	                            <p>13/25 New Avenue
-	                                <br>New Heaven
-	                                <br>45Y 73J
-	                                <br>England
-	                                <br>
-	                                <strong>Great Britain</strong>
-	                            </p>
-
-	                            <h3 class="text-uppercase">Call center</h3>
-	                            <p class="text-muted">This number is toll free if calling from Great Britain otherwise we advise you to use the electronic form of communication.</p>
-	                            <p><strong>+33 555 444 333</strong>
-	                            </p>
-	                            <h3 class="text-uppercase">Electronic support</h3>
-	                            <p class="text-muted">Please feel free to write an email to us or to use our electronic ticketing system.</p>
-	                            <ul>
-	                                <li><strong><a href="mailto:">info@fakeemail.com</a></strong>
-	                                </li>
-	                                <li><strong><a href="#">Ticketio</a></strong> - our ticketing support platform</li>
-	                            </ul>
+	                            <h3 class="text-uppercase">Adresse</h3>
+															<p><strong>Studios de la Forêt BP 28</strong>
+									                <br>19231 - Pompadour
+									                <br>
+									                <br>Téléphone : 05 55 73 38 48
+									                <br>Fax : 05 55 73 62 24
+									                <br>
+									                <br>SIRET : 327 493 151 00028
+									                <br>APE (NAF) : 922A
+									            </p>
 	                        </section>
 	                    </div>
 
