@@ -1,3 +1,27 @@
+<?php
+  include"includes/database.php";
+
+  if(!isset($_GET['id'])){
+    header('location:index.php');
+  }
+
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM podcasts P, emissions E WHERE P.emission_podcast = E.id_emission AND P.id_podcast = $id";
+  $podcast = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+  $titre = $podcast['titre_emission'];
+
+  if($podcast['photo_podcast'] != null){
+    $photo = $podcast['photo_podcast'];
+  } else {
+    $photo = $podcast['photo_emission'];
+  }
+
+  $sql = "SELECT * FROM tag_podcast TP, tags T WHERE TP.id_tag = T.id_tag AND TP.id_podcast = $id";
+  $tags = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -66,11 +90,11 @@
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                            <li><a href="#">Emissions</a>
+                            <li><a href="liste_emission.php">Emissions</a>
                             </li>
-                            <li><a href="#">Les lectures de Marie</a>
+                            <li><a href="emission.php?id=<?=$podcast['emission_podcast'];?>"><?=$titre;?></a>
                             </li>
-                            <li>Simplissime: Le livre de cuisine le + facile du monde</li>
+                            <li><?=$podcast['titre_podcast'];?></li>
                         </ul>
 
                     </div>
@@ -89,15 +113,15 @@
                     <div class="col-md-9" id="blog-post">
 
                         <!-- Titre de l'article + date et auteur -->
-                        <p class="lead"><h1>Les lectures de Marie</h1></p>
-                        <p><h3>Simplissime: Le livre de cuisine le + facile du monde</h3></p>
-                        <p class="text-muted text-uppercase mb-small text-right">Par <a href="#">John Doe</a> | 24 Mai 2016</p>
+                        <p class="lead"><h1><?=$titre;?></h1></p>
+                        <p><h3><?=$podcast['titre_podcast'];?></h3></p>
+                        <p class="text-muted text-uppercase mb-small text-right">Publié le <?=$podcast['date_podcast'];?></p>
 
                         <!-- Contenu de l'article -->
                         <div id="post-content">
 
                           <p>
-                              <center><img src="http://radiopac.fr/IMG/jpg/PAC_Litterature_A3.jpg" class="img-responsive" alt="Example blog post alt"></center>
+                              <center><img src="<?=$photo;?>" class="img-responsive" alt="Example blog post alt"></center>
                           </p>
 
                           <br><br>
@@ -112,9 +136,7 @@
 
                             <div class="col-md-6">
 
-                              <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-                                  semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean
-                                  fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+                              <?=$podcast['descri_podcast'];?>
 
                             </div>
                         </div>
@@ -150,49 +172,37 @@
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Recherche</h3>
-                            </div>
-
-                            <div class="panel-body">
-                                <form role="search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <span class="input-group-btn">
-
-		    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
-
-		</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default sidebar-menu">
-
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Categorie</h3>
+                                <h3 class="panel-title">Emission</h3>
                             </div>
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="blog.html">Gastronomie</a>
+                                    <li class="active"><a href="emission.php?id=<?=$podcast['emission_podcast'];?>"><?=$titre;?></a>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="panel sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Tags</h3>
-                            </div>
+                        <?php
+                        if($tags != null){ ?>
 
-                            <div class="panel-body">
-                                <ul class="tag-cloud">
-                                    <li><a href="#"><i class="fa fa-tags"></i>Cuisine</a>
-                                    </li>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                          <div class="panel sidebar-menu">
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">Tags</h3>
+                              </div>
+
+                              <div class="panel-body">
+                                  <ul class="tag-cloud">
+                                    <?php
+                                      foreach($tags as $tag){ ?>
+
+                                        <li><a href="liste_article.php?filtre=tag&id=<?=$tag['id_tag'];?>"><i class="fa fa-tags"></i><?=$tag['lib_tag'];?></li>
+
+                                    <?php  } ?>
+                                  </ul>
+                              </div>
+                          </div>
+                        <?php }
+                      ?>
 
                         <!-- *** MENUS AND FILTERS END *** -->
 

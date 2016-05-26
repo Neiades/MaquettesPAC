@@ -1,3 +1,48 @@
+<?php
+  include"includes/database.php";
+
+  if(!isset($_GET['id'])){
+    header('location:index.php');
+  }
+
+  $id = $_GET['id'];
+  $sql = "SELECT * FROM articles WHERE id_article = $id";
+  $article = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+  $sql = "SELECT * FROM tag_article TA, tags T WHERE TA.id_tag = T.id_tag AND TA.id_article = $id";
+  $tags = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+
+  if($article['id_emission'] != null){
+
+        $id_emission = $article['id_emission'];
+        $sql = "SELECT titre_emission, photo_emission FROM emissions WHERE id_emission = $id_emission";
+        $emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $titre = $emission['titre_emission'];
+        $photo = $emission['photo_emission'];
+
+        $filtre = "emission";
+        $id = $article['id_emission'];
+
+  } else if($article['categ_article'] != null){
+
+        $id_categ = $article['categ_article'];
+        $sql = "SELECT lib_cat, photo_cat FROM categories WHERE id_cat = $id_categ";
+        $categorie = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+        $titre = $categorie['lib_cat'];
+        $photo = $categorie['photo_cat'];
+
+        $filtre = "categorie";
+        $id = $article['categ_article'];
+
+    }
+
+    if($article['photo_article'] != null){
+        $photo = $article['photo_article'];
+    }
+
+ ?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -59,16 +104,15 @@
         <div id="heading-breadcrumbs">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <h1></h1>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                            <li><a href="#">Politique</a>
-                            </li>
-                            <li>Lorem ipsum sapien ullamcorper pharetra</li>
+                              <li><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id?>"><?=$titre;?></a></li>
+                            <li><?=$article['titre_article'];?></li>
                         </ul>
 
                     </div>
@@ -87,53 +131,18 @@
                     <div class="col-md-9" id="blog-post">
 
                         <!-- Titre de l'article + date et auteur -->
-                        <p class="lead"><h1>Lorem ipsum sapien ullamcorper pharetra</h1></p>
-                        <p class="text-muted text-uppercase mb-small text-right">Par <a href="#">John Doe</a> | 24 Mai 2016</p>
+                        <p class="lead"><h1><?=$article['titre_article'];?></h1></p>
+                        <p class="text-muted text-uppercase mb-small text-right">Publié le <?=$article['date_article'];?></p>
 
                         <!-- Contenu de l'article -->
                         <div id="post-content">
 
                           <p>
-                              <img src="img/blog2.jpg" class="img-responsive" alt="Example blog post alt">
+                              <img src="<?=$photo;?>" class="img-responsive" alt="Example blog post alt">
                           </p>
                           <br>
-                            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-                                semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean
-                                fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 
-
-                            <h2>Sous-titre </h2>
-
-                            <ol>
-                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                <li>Aliquam tincidunt mauris eu risus.</li>
-                            </ol>
-
-                            <blockquote>
-                                <p>Ceci est une citation.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p><p> Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada
-                                    tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p>
-                            </blockquote>
-
-                            <h3>Header Level 3</h3>
-
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                                ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
-                                condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros
-                                eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-
-                            <ul>
-                                <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-                                <li>Aliquam tincidunt mauris eu risus.</li>
-                            </ul>
-
-                            <p>
-                                <img src="img/blog.jpg" class="img-responsive" alt="Example blog post alt">
-                            </p>
-
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-                                ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt
-                                condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros
-                                eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                            <?=$article['contenu_article'];?>
 
                         </div>
                         <!-- /#post-content -->
@@ -166,55 +175,38 @@
                         <div class="panel panel-default sidebar-menu">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Recherche</h3>
-                            </div>
-
-                            <div class="panel-body">
-                                <form role="search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <span class="input-group-btn">
-
-		    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
-
-		</span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default sidebar-menu">
-
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Categorie</h3>
+                                <h3 class="panel-title"><?=$filtre;?></h3>
                             </div>
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="blog.html">Politique</a>
+                                    <li class="active"><a href="liste_article.php?filtre=<?=$filtre;?>&id=<?=$id?>"><?=$titre;?></a>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="panel sidebar-menu">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Tags</h3>
-                            </div>
+                        <?php
 
-                            <div class="panel-body">
-                                <ul class="tag-cloud">
-                                    <li><a href="#"><i class="fa fa-tags"></i> Les Républicains</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> Partie Socialiste</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> François Hollande</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-tags"></i> 2017</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                          if($tags != null){ ?>
 
+                            <div class="panel sidebar-menu">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Tags</h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <ul class="tag-cloud">
+                                      <?php
+                                        foreach($tags as $tag){ ?>
+
+                                          <li><a href="liste_article.php?filtre=tag&id=<?=$tag['id_tag'];?>"><i class="fa fa-tags"></i><?=$tag['lib_tag'];?></a></li>
+
+                                      <?php  } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                          <?php }
+                        ?>
                         <!-- *** MENUS AND FILTERS END *** -->
 
                     </div>

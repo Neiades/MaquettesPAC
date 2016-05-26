@@ -246,7 +246,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-8 col-sm-8 col-xs-8">
-                                            <h2 style="margin-top : 0; margin-bottom : 5px;"><a href="post.htmls"><?=$article['titre_article'];?></a></h2>
+                                            <h2 style="margin-top : 0; margin-bottom : 5px;"><a href="article.php?id=<?=$article['id_article'];?>"><?=$article['titre_article'];?></a></h2>
                                             <div class="clearfix">
                                                 <p class="author-category"><?=$emission['titre_emission'];?></p>
                                                 <p class="date-comments">
