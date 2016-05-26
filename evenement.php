@@ -163,7 +163,7 @@
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="liste_article.php?id_event=<?=$evenement['type_event'];?>"><?=$evenement['lib_type_event'];?></a>
+                                    <li class="active"><a href="liste_article.php?filtre=event&id_event=<?=$evenement['type_event'];?>"><?=$evenement['lib_type_event'];?></a>
                                 </ul>
                             </div>
                         </div>

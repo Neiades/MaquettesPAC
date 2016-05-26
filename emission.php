@@ -4,7 +4,7 @@
   if(!isset($_GET['id'])){
 	  header('Location:index.php');
   }
-  
+
   $id = $_GET['id'];
   $sql = "SELECT * FROM emissions WHERE id_emission = $id";
   $emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -133,7 +133,7 @@
                             <div id="liste-podcast" class="row">
 
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <div class="box-image-text blog">
+                                    <div class="box-image-text custom-box blog">
                                         <div class="top">
                                             <div class="image">
                                                 <img id="img-podcast1" src="" alt="" class="img-responsive">
@@ -141,7 +141,7 @@
                                             <div class="bg"></div>
                                             <div class="text">
                                                 <p class="buttons">
-                                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
+                                                    <a id="link-podcast1" href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -156,7 +156,7 @@
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <div class="box-image-text blog">
+                                    <div class="box-image-text custom-box blog">
                                         <div class="top">
                                             <div class="image">
                                                 <img id="img-podcast2" src="" alt="" class="img-responsive">
@@ -164,7 +164,7 @@
                                             <div class="bg"></div>
                                             <div class="text">
                                                 <p class="buttons">
-                                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
+                                                    <a id="link-podcast2" href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@
                                 </div>
 
                                 <div class="col-md-4 col-sm-4 col-xs-4">
-                                    <div class="box-image-text blog">
+                                    <div class="box-image-text custom-box blog">
                                         <div class="top">
                                             <div class="image">
                                                 <img id="img-podcast3" src="" alt="" class="img-responsive">
@@ -187,7 +187,7 @@
                                             <div class="bg"></div>
                                             <div class="text">
                                                 <p class="buttons">
-                                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
+                                                    <a id="link-podcast3" href="portfolio-detail.html" class="btn btn-template-transparent-primary"><i class="fa fa-link"></i> Ecouter le podcast</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -359,6 +359,7 @@
       request.done(function(data){
 
         for (var i = 1; i <= 3 ; i++) {
+          $('#link-podcast'+i).attr('href','');
           $('#img-podcast'+i).attr('src','');
           $('#titre-podcast'+i).html('');
           $('#date-podcast'+i).html('');
@@ -373,6 +374,7 @@
           } else {
             var photo = value.photo_podcast;
           }
+          $('#link-podcast'+i).attr('href','podcast.php?id='+value.id_podcast);
           $('#img-podcast'+i).attr('src',photo);
           $('#titre-podcast'+i).html(value.titre_podcast);
           $('#date-podcast'+i).html(value.date_podcast);
