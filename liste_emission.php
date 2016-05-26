@@ -1,3 +1,6 @@
+<?php
+	include "includes/database.php";
+?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -47,7 +50,7 @@
 	                    <div class="col-md-5">
 	                        <ul class="breadcrumb">
 	                            <li><a href="index.php">Accueil</a></li>
-															<li>Emissions</li>
+								<li>Emissions</li>
 	                        </ul>
 	                    </div>
 	                </div>
@@ -63,63 +66,31 @@
 							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Toutes les émissions de Radio Pac !</h1></p></center></div></div>
 							<br><br><br>
 
-							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Nom emission</a></h2>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+							<?php
+								$sql = "SELECT * FROM emissions";
+								$emissions = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+								foreach($emissions as $emission){ ?>
 
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+									<section class="post">
+			                            <div class="row custom-box" style="padding-bottom:0;">
 
-							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Nom emission</a></h2>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+			                                <div class="col-md-4" style="padding-left:0;">
+			                                    <div class="image" style="margin-bottom:0;">
+			                                        <a href="emission.php?id=<?=$emission['id_emission'];?>">
+			                                            <img src="<?=$emission['photo_emission'];?>" class="img-responsive" alt="">
+			                                        </a>
+			                                    </div>
+			                                </div>
+			                                <div class="col-md-8">
+			                                    <h2 style="margin-top:5px;"><a href="emission.php?id=<?=$emission['id_emission'];?>"><?=$emission['titre_emission'];?></a></h2>
+			                                    <p class="intro"><?=$emission['descri_emission'];?></p>
+			                                </div>
 
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
+			                            </div>
+			                        </section>
 
-							<section class="post">
-	                            <div class="row">
-	                                <div class="col-md-4">
-	                                    <div class="image">
-	                                        <a href="blog-post.html">
-	                                            <img src="img/blog-medium.jpg" class="img-responsive" alt="Example blog post alt">
-	                                        </a>
-	                                    </div>
-	                                </div>
-	                                <div class="col-md-8">
-	                                    <h2><a href="post.htmls">Nom emission</a></h2>
-	                                    <p class="intro">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper.
-	                                        Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-
-	                                    </p>
-	                                </div>
-	                            </div>
-	                        </section>
-
+								<?php }
+							?>
                     	</div>
 	                </div>
 	            </div>
