@@ -214,7 +214,7 @@
 
                             <div class="panel panel-default sidebar-menu">
                               <div class="panel-heading">
-                                  <h3 style="font-size: 24px;" class="panel-title"><a href="liste_article.php?id_emission=<?=$id; ?>">Derniers articles...</a></h3>
+                                  <h3 style="font-size: 24px;" class="panel-title"><a href="liste_article.php?filtre=emission&id=<?=$id; ?>">Derniers articles...</a></h3>
                                 </div>
                             </div>
 
