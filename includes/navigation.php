@@ -1,5 +1,8 @@
-<!-- *** TOP ***
-_________________________________________________________ -->
+<!-- *** TOP *** -->
+<?php
+  $sql = "SELECT * FROM categories";
+  $categories = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+?>
 <div id="top">
     <div class="container">
         <div class="row">
@@ -71,12 +74,11 @@ _________________________________________________________ -->
             <li class="dropdown">
                 <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Actualité <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="liste_article.php">Toutes les infos</a>
-                    </li>
-                    <li><a href="liste_article.php?filtre=categorie&id=2">Locale</a>
-                    </li>
-                    <li><a href="liste_article.php?filtre=categorie&id=3">Régionale</a>
-                    </li>
+                    <li><a href="liste_article.php">Toutes les infos</a></li>
+                    <?php
+                      foreach($categories as $categorie){ ?>
+                        <li><a href="liste_article.php?filtre=categorie&id=<?=$categorie['id_cat'];?>"><?=$categorie['lib_cat'];?></a></li>
+                      <?php } ?>
                   </ul>
               </li>
 
