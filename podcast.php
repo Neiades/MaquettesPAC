@@ -9,6 +9,10 @@
   $sql = "SELECT * FROM podcasts P, emissions E WHERE P.emission_podcast = E.id_emission AND P.id_podcast = $id";
   $podcast = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
+  $podcast['date_podcast'] = date_create($podcast['date_podcast']);
+  $podcast['date_podcast'] = date_format($podcast['date_podcast'], 'd/m/Y');
+
+
   $titre = $podcast['titre_emission'];
 
   if($podcast['photo_podcast'] != null){
