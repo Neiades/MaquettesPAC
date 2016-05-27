@@ -55,6 +55,9 @@
     <!-- Custom stylesheet - for your changes -->
     <link href="css/custom.css" rel="stylesheet">
 
+    <!-- CSS pour Jplayer -->
+    <link href="css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Responsivity for older IE -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -134,13 +137,43 @@
 
                             <div class="col-md-6">
 
-                              <img src="img/jplayer.png" class="img-responsive" alt="Example blog post alt">
-                              <br>
+                              <div id="podcast" class="jp-jplayer"></div>
+                  						<div id="jp_container_1" class="jp-audio" style="width:250px;" role="application" aria-label="media player">
+                  							<div class="jp-type-single">
+                  								<div class="jp-gui jp-interface">
+                  									<div class="jp-controls">
+                  										<button class="jp-play" role="button" tabindex="0">Jouer</button>
+                  										<button class="jp-stop" role="button" tabindex="0">Stop</button>
+                  									</div>
+                  									<div class="jp-volume-controls" style="margin-left : -180px;">
+                  										<button class="jp-mute" role="button" tabindex="0">mute</button>
+                  										<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+                  										<div class="jp-volume-bar">
+                  											<div class="jp-volume-bar-value"></div>
+                  										</div>
+                  									</div>
+                  								</div>
+                  								<div class="jp-details">
+                  									<div class="jp-title" aria-label="title" id="titre"></div>
+                  								</div>
+                  								<div class="jp-no-solution">
+                  									<span>Update Required</span>
+                  									To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                  								</div>
+                  							</div>
+                  						</div>
+
+
                             </div>
 
                             <div class="col-md-6">
 
                               <?=$podcast['descri_podcast'];?>
+
+                              <!-- Input caché pour récupérer le path + titre du podcast -->
+                              <input id="title_podcast" hidden value="<?=$podcast['titre_podcast'];?>"></input>
+
+                              <input id="path_podcast" hidden value="<?=$podcast['chemin_podcast'];?>"></p></input>
 
                             </div>
                         </div>
@@ -236,9 +269,11 @@
     <!-- #### JAVASCRIPT FILES ### -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
     <script>
         window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
     </script>
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <script src="js/jquery.cookie.js"></script>
@@ -249,6 +284,58 @@
 
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+
+    <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+
+    <script type="text/javascript">
+
+        var title_podcast = $('#title_podcast').val();
+        var path_podcast = $('#path_podcast').val();
+
+				function loadXMLDoc()
+				{
+					var xmlhttp;
+					var div = document.getElementById("myDiv");
+					if (window.XMLHttpRequest)
+					{
+						xmlhttp=new XMLHttpRequest();
+					}
+					else
+					{
+						xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+
+					xmlhttp.onreadystatechange=function()
+					{
+						if (xmlhttp.readyState==4 && xmlhttp.status==200)
+						{
+							document.getElementById("titre").innerHTML=" "+xmlhttp.responseText;
+						}
+					}
+
+					//xmlhttp.open("GET","titre.txt",true);
+					xmlhttp.send();
+					setTimeout(loadXMLDoc,500);
+				}
+
+
+
+				$(document).ready(function(){
+					$("#podcast").jPlayer({
+						ready: function (event) {
+							$(this).jPlayer("setMedia", {
+								mp3: path_podcast,
+                title: title_podcast,
+							});
+						},
+						swfPath: "js",
+						supplied: "mp3",
+						wmode: "window",
+						useStateClassSkin: true,
+						keyEnabled: true,
+					});
+				});
+		</script>
 
 
 

@@ -18,13 +18,17 @@
         $sql = "SELECT titre_emission, photo_emission FROM emissions WHERE id_emission = $id_emission";
         $emission = $db->query($sql)->fetch(PDO::FETCH_ASSOC);
 
+        $article['date_article'] = date_create($article['date_article']);
+        $article['date_article'] = date_format($article['date_article'], 'd/m/Y');
+
         $titre = $emission['titre_emission'];
         $photo = $emission['photo_emission'];
 
         $filtre = "Emission";
         $id = $article['id_emission'];
 
-        $url = "emission.php?id=".$id;
+        $urlHaut = "emission.php?id=".$id;
+        $urlType = "liste_article.php?filtre=emission&id=".$id;
 
   } else if($article['categ_article'] != null){
 
@@ -38,7 +42,8 @@
         $filtre = "Categorie";
         $id = $article['categ_article'];
 
-        $url = "liste_article.php?filtre=categorie&id=".$id;
+        $urlHaut = "liste_article.php?filtre=categorie&id=".$id;
+        $urlType = $urlHaut;
 
     }
 
@@ -115,7 +120,7 @@
                         <ul class="breadcrumb">
                             <li><a href="index.php">Accueil</a>
                             </li>
-                              <li><a href="<?=$url;?>"><?=$titre;?></a></li>
+                              <li><a href="<?=$urlHaut;?>"><?=$titre;?></a></li>
                             <li><?=$article['titre_article'];?></li>
                         </ul>
 
@@ -184,7 +189,7 @@
 
                             <div class="panel-body">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="<?=$url;?>"><?=$titre;?></a>
+                                    <li class="active"><a href="<?=$urlType;?>"><?=$titre;?></a>
                                 </ul>
                             </div>
                         </div>

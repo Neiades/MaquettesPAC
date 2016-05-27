@@ -63,12 +63,12 @@
 		}
 
 	} else {
-		//Selection de tous les articles
+		//Selection de tous les articles si aucun filtre placé en GET
 		$sql = "SELECT * FROM articles ORDER BY id_article DESC LIMIT $limite,4";
 		$articles = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-		//parcours des articles
+		//Parcours des articles
 		foreach ($articles as $article) {
-			//initialisation d'un tempon
+			//initialisation d'un tampon
 			$unarticle = array();
 
 			//remplissage du tempon

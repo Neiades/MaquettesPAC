@@ -40,6 +40,31 @@
 	    <link href="css/owl.theme.css" rel="stylesheet">
 
 		<link href="css/custom.css" rel="stylesheet">
+
+		<?php
+				//1 - On place en parametre les clés nécessaires à la connexion OAuth, pour utiliser l'API TwitterOauth
+
+				$consumer_key='Xny0VkPmIiKrQv2FEwTcay12A';
+				$consumer_secret='MLNzIn2mm3S3qoRatuFHie0EXDuKXKiUr9oBAmAQHipPsu9ppI';
+				$oauth_token = '302258590-3dktRQsICCyyVt7Fvi4mlI9rSyOS8DYAwkjuSLUr';
+				$oauth_token_secret = 'Nb81PlwL481oAIxbDRVXxoSMVqdzPpUQYtKFQf551rtKn';
+
+				// On s'assure que les clés sont bien placées en parametre
+				if(!empty($consumer_key) && !empty($consumer_secret) && !empty($oauth_token) && !empty($oauth_token_secret)) {
+
+				//2 - On inclut la librairie facilitant la connexion pour l'API twitter
+				require_once('twitteroauth/twitteroauth.php');
+
+				//3 - Authentification - On crée un objet de connexion
+				$connection = new TwitterOAuth($consumer_key, $consumer_secret, $oauth_token, $oauth_token_secret);
+
+				//4 - On query les résultats voulus, ici les 4 derniers tweets provenant du Twitter de RadioPac | screen_name = nom du compte (@mention) et count = limite affiché
+				$query = 'https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=radiopac&count=3';
+				$tweets = $connection->get($query);
+
+				}
+		?>
+
 	</head>
 
 	<body>
@@ -341,48 +366,73 @@
 							<section>
 								<!-- Widget Facebook -->
 								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
+									<?php
+
+										//Fonction pour convertir la date format US en Fr avec syntaxe
+										setlocale(LC_ALL, 'fr_FR','fra');
+										function dateFr($date){
+
+											//On parametre l'affichage de la date tel qu'elle sortira en français
+									    $strDate = '%d %B %Y';
+
+											//Return de la fonction, 1er parametre est la syntaxe finale, et le second est la date "brute"
+									    return strftime($strDate ,strtotime($date));
+										}
+
+										//Lien récupérant le contenu de la page, le fil d'actualité de la page voulu (ici RadioPac), avec un token access spécifique (géré sur facebook) et en parametre le nombre d'occurence voulu
+										$facebook = file_get_contents('https://graph.facebook.com/radiopac/feed?access_token=236070986766005|HZR3uYByd-0BIonuSBmyLKTHhR0&limit=3');
+
+										//Decode du JSON obtenu avant
+										$facebook = json_decode($facebook, true);
+
+										$facebook_annonces = $facebook['data'];
+
+									?>
 									<div class="panel panel-default sidebar-menu">
 
 			                            <div style="margin-bottom:20px;" class="panel-heading">
 			                                <h3 style="border-bottom: solid 5px #3C5899;" class="panel-title"><i class="fa fa-facebook" style="margin-right:10px;color:#3C5899;" aria-hidden="true"></i>Facebook</h3>
 			                            </div>
+											<?php
 
-			                            <div style="margin-top:15px;margin-bottom:15px;" class="panel-body text-widget">
-			                                <p>26 avril, 22:39</p>
-											<p>Amis du Limousin et du Périgord, bonjour !<br>Commençons cette journée par une bonne nouvelle ...<p>
-											<button class="pull-right custom-btn-fa">Lire ></button>
+											foreach($facebook_annonces as $facebook_annonce){
+
+												//On réduit la taille du contenu du post récupéré
+												if(strlen($facebook_annonce['message']) > 100){
+													$facebook_annonce['message'] = substr($facebook_annonce['message'],0,100)."...";
+												} ?>
+
+												<div style="margin-top:15px;margin-bottom:15px;" class="panel-body text-widget">
+														<p><?=dateFr($facebook_annonce['created_time']);?></p>
+														<p><?=$facebook_annonce['message'];?></p>
+											<a href="https://facebook.com/<?=$facebook_annonce['id'];?>" target="_blank" class="pull-right custom-btn-fa">Lire</a>
 										</div>
 
-										<hr style="border:1px solid #3C5899;">
+					<hr style="border:1px solid #3C5899;">
 
-										<div  style="margin-top:15px;margin-bottom:15px;" class="panel-body text-widget">
-			                                <p>26 avril, 22:39</p>
-											<p>Amis du Limousin et du Périgord, bonjour !<br>Commençons cette journée par une bonne nouvelle ...<p>
-											<button class="pull-right custom-btn-fa">Lire ></button>
+										<?php	} ?>
+                    </div>
+
 										</div>
-			                        </div>
-								</div>
+										<br>
 								<!-- Widget Twitter -->
 								<div class="col-xs-12 col-sm-6 col-md-12 col-xl-12">
 									<div class="panel panel-default sidebar-menu">
-			                            <div class="panel-heading">
-			                                <h3 style="border-bottom: solid 5px #00ACED;" class="panel-title"><i class="fa fa-twitter" style="margin-right:10px;color:#00ACED;" aria-hidden="true"></i>Twitter</h3>
-			                            </div>
-
-			                            <div class="panel-body text-widget">
-			                                <p>Radio <span style="color:#bfbdbd;">‏@radiopac - 27 avr.</span></p>
-											<p>Amis du Limousin et du Périgord, bonjour !<br>Commençons cette journée par une bonne nouvelle ...<p>
-											<button class="pull-right custom-btn-tw">Lire ></button>
-			                            </div>
-
-										<hr style="border:1px solid #00ACED;">
-
-										<div class="panel-body text-widget">
-			                                <p>Radio <span style="color:#bfbdbd;">‏@radiopac - 27 avr.</span></p>
-											<p>Amis du Limousin et du Périgord, bonjour !<br>Commençons cette journée par une bonne nouvelle ...<p>
-											<button class="pull-right custom-btn-tw">Lire ></button>
-			                            </div>
-			                        </div>
+                    <div class="panel-heading">
+                        <h3 style="border-bottom: solid 5px #00ACED;" class="panel-title"><i class="fa fa-twitter" style="margin-right:10px;color:#00ACED;" aria-hidden="true"></i>Twitter</h3>
+                    </div>
+										<?php
+												foreach($tweets as $tweet){ ?>
+												<div class="panel panel-default sidebar-menu">
+														<div class="panel-body text-widget">
+																<p><?=$tweet->user->name;?> <span style="color:#bfbdbd;">‏@<?=$tweet->user->screen_name;?> - <?=dateFr($tweet->created_at);?></span></p>
+																<p><?=$tweet->text;?><p>
+																<a href="https://twitter.com/radiopac/status/<?=$tweet->id_str;?>" target="_blank" class="pull-right custom-btn-tw">Lire ></a>
+														</div>
+														<hr style="border:1px solid #00ACED;">
+												</div>
+											<?php	}
+										?>
 								</div>
 							</section>
 						</div>
