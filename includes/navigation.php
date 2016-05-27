@@ -150,12 +150,12 @@ _________________________________________________________ -->
             </div>
             <div class="modal-body">
 
-                <form action="customer-orders.html" method="post">
+                <form action="traitements/connexion_back.php" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="id_modal" placeholder="Identifiant">
+                        <input type="text" name="username" class="form-control" id="id_modal" placeholder="Identifiant">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="password_modal" placeholder="Mot de passe">
+                        <input type="password" name="password" class="form-control" id="password_modal" placeholder="Mot de passe">
                     </div>
 
                     <p class="text-center">
