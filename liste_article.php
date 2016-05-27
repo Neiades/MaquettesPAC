@@ -82,7 +82,7 @@
 			<div id="content">
 	            <div class="container">
 	                <div class="row">
-						<div class="col-md-10 col-md-offset-1" id="blog-listing-medium">
+						<div class="col-md-8" id="blog-listing-medium">
 
 							<div class="panel panel-default sidebar-menu"><div class="panel-heading"><center><p class="lead"><h1 class="panel-title" style="font-size: 42px;">Nos articles</h1></p></center></div></div>
 							<br><br><br>
@@ -96,6 +96,58 @@
 								<li class="next" id="article-ancien"><a href="#">Ancien &rarr;</a></li>
 							</ul>
                     	</div>
+
+						<div class="col-md-3 col-md-offset-1">
+							<div class="hidden-xs hidden-sm" style="height:187px;"></div>
+							<div class="panel panel-default sidebar-menu">
+
+								<ul class="nav nav-pills nav-stacked">
+									<li <?php if(!isset($_GET['filtre']) && !isset($_GET['id'])){echo " class='active'";} ?>><a href="liste_article.php">Tous</a></li>
+								</ul>
+
+								<hr>
+
+	                            <div class="panel-heading">
+	                                <h3 class="panel-title">Catégories</h3>
+	                            </div>
+
+								<div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+									<?php
+										$sql = "SELECT id_cat, lib_cat FROM categories";
+										$categories = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+										foreach($categories as $categorie){
+											if($_GET['filtre'] == "categorie" && $_GET['id'] == $categorie['id_cat']){ ?>
+												<li class="active"><a href="liste_article.php?filtre=categorie&id=<?=$categorie['id_cat'];?>"><?=$categorie['lib_cat'];?></a></li>
+											<?php } else { ?>
+												<li><a href="liste_article.php?filtre=categorie&id=<?=$categorie['id_cat'];?>"><?=$categorie['lib_cat'];?></a></li>
+											<?php }
+										}
+									?>
+									</ul>
+								</div>
+								<hr>
+								<div class="panel-heading">
+	                                <h3 class="panel-title">Emissions</h3>
+	                            </div>
+
+	                            <div class="panel-body">
+									<ul class="nav nav-pills nav-stacked">
+										<?php
+											$sql = "SELECT id_emission, titre_emission FROM emissions";
+											$emissions = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+											foreach($emissions as $emission){
+												if($_GET['filtre'] == "emission" && $_GET['id'] == $emission['id_emission']){ ?>
+													<li class="active"><a href="liste_article.php?filtre=emission&id=<?=$emission['id_emission'];?>"><?=$emission['titre_emission'];?></a></li>
+												<?php } else { ?>
+													<li><a href="liste_article.php?filtre=emission&id=<?=$emission['id_emission'];?>"><?=$emission['titre_emission'];?></a></li>
+												<?php }
+											}
+										?>
+									</ul>
+								</div>
+							</div>
+						</div>
 	                </div>
 	            </div>
 	        </div>
